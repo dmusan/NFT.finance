@@ -6,7 +6,7 @@ const HomeCard = () => {
       <div class="col s12 m6 offset-m3">
         <div class="card blue-grey center-align">
           <div class="card-content white-text">
-            <span class="card-title">DOTC.market</span>
+            <span class="card-title">Get Started</span>
             <br/>
             <p>
               New users are advised to check the

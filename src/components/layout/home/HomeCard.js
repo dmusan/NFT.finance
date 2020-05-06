@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const HomeCard = () => {
   return (
@@ -10,16 +11,16 @@ const HomeCard = () => {
             <br/>
             <p>
               New users are advised to check the
-              <a href="#" class="white-text bold"><b> docs</b></a> first to take full advantage
+              <NavLink to='/docs' class="white-text bold"><b> docs</b></NavLink> first to take full advantage
               of all the features
             </p>
             <br/>
           </div>
           <div class="card-action">
-            <a href="#">Place new order</a>
+            <NavLink to='/neworder'>Place new order</NavLink>
           </div>
           <div class="card-action">
-            <a href="#">View all pending orders</a>
+            <NavLink to='/allorders'>View all pending orders</NavLink>
           </div>
         </div>
       </div>

@@ -4,15 +4,22 @@ const HomeCard = () => {
   return (
     <div class="row">
       <div class="col s12 m6 offset-m3">
-        <div class="card blue-grey darken-1">
+        <div class="card blue-grey center-align">
           <div class="card-content white-text">
-            <span class="card-title">Card Title</span>
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
+            <span class="card-title">DOTC.market</span>
+            <br/>
+            <p>
+              New users are advised to check the
+              <a href="#" class="white-text bold"><b> docs</b></a> first to take full advantage
+              of all the features
+            </p>
+            <br/>
           </div>
           <div class="card-action">
-            <a href="#">This is a link</a>
-            <a href="#">This is a link</a>
+            <a href="#">Place new order</a>
+          </div>
+          <div class="card-action">
+            <a href="#">View all pending orders</a>
           </div>
         </div>
       </div>

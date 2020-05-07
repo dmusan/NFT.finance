@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 const NewOrderCard = () => {
   return (
-    <div class="row">
-      <div class="col s12 m6 offset-m3">
+    <div class="row card-width">
+      <div class="col s12 m12 card-width">
         <div class="card blue-grey center-align">
           <div class="card-content white-text">
             <span class="card-title">New Order</span>

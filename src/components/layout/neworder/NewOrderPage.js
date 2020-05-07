@@ -4,7 +4,7 @@ import '../../../css/mystyles.css'
 
 const NewOrderPage = () => {
   return (
-    <div>
+    <div className="valign-wrapper vertical-wrapper">
       <NewOrderCard />
     </div>
   )

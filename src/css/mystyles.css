@@ -2,6 +2,10 @@
   min-height: 90vh;
 }
 
-.card-width{
+.card-width {
   width:40%;
+}
+
+.margin-container {
+  margin-top: 3%;
 }

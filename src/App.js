@@ -10,7 +10,7 @@ import AllOrdersPage from './components/layout/allorders/AllOrdersPage'
 
 
 class App extends Component {
-
+  
   render() {
     return (
       <BrowserRouter>

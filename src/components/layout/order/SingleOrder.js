@@ -15,7 +15,6 @@ class SingleOrder extends Component {
       var instances = M.Collapsible.init(elems, options);
     }
 
-
     if (document.readyState !== "loading") {
       onReady(); // Or setTimeout(onReady, 0); if you want it consistently async
     } else {
@@ -25,17 +24,29 @@ class SingleOrder extends Component {
   }
 
   render() {
-
-  return (
-    <ul class="collapsible">
-
-    <li>
-  <div class="collapsible-header"><i class="material-icons">place</i>Third</div>
-  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-</li>
-</ul>
-  )
-}
+    return (
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header"><b>ENS: </b> vitalik.eth</div>
+          <div class="collapsible-body">
+            <div class="card transparent z-depth-0 center-align">
+              <div class="card-content black-text">
+                <span class="card-title">ENS name: vitalik.eth</span>
+                <br/>
+                <p>
+                  Terms of loan
+                </p>
+                <br/>
+              </div>
+              <div class="card-action">
+                <a href='/'>Cancel</a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    )
+  }
 }
 
 export default SingleOrder;

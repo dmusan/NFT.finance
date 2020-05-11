@@ -5,12 +5,7 @@ import SingleMyCard from "./SingleMyCard"
 const MyCards = () => {
   return (
     <div className="row">
-    <div class="col s12 m12">
-      <ul className="tabs wrapper">
-        <SingleMyCard />
-
-      </ul>
-    </div>
+      <SingleMyCard />
     </div>
   )
 }

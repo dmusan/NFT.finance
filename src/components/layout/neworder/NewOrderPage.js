@@ -1,18 +1,17 @@
 import React from 'react'
 import NewOrderCard from './NewOrderCard'
 import MyCards from '../cards/MyCards'
+import ModalOrder from './ModalOrder'
 import '../../../css/mystyles.css'
 
 const NewOrderPage = () => {
   return (
     <div className="container">
-      <h3>Pick an NFT from your wallet</h3>
+      <h4>Pick an NFT from your wallet for the loan</h4>
       <div className="wrapper">
         <MyCards />
       </div>
-      <div className="valign-wrapper vertical-wrapper">
-        <NewOrderCard />
-      </div>
+      <ModalOrder />
     </div>
   )
 }

@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {Component} from 'react'
 import '../../../css/mystyles.css'
 import IMG_001 from "../../../assets/img/001.png"
+//import ModalOrder from '../neworder/ModalOrder'
 
 const SingleMyCard = () => {
+
   return (
-    <li className="tab col s3 m3 wrapper">
-      <div className="card my-card">
+    <div className="col s3 m3">
+      <div className="card">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src={IMG_001} />
         </div>
@@ -13,7 +15,9 @@ const SingleMyCard = () => {
           <i class ="material-icons large">aspect ratio</i>
           <p>smth</p>
         </div>
-        <div class="card-action"><a href="#">Click here</a></div>
+        <div class="card-action">
+          <a class="btn modal-trigger" href="#modal1">Modal</a>
+        </div>
         <div class="card-reveal">
           <div class="card-title grey-text text-darken-4">
             Card Title
@@ -24,8 +28,9 @@ const SingleMyCard = () => {
           </div>
         </div>
       </div>
-    </li>
+    </div>
   )
+
 }
 
 export default SingleMyCard;

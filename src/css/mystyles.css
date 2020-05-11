@@ -9,3 +9,11 @@
 .margin-container {
   margin-top: 3%;
 }
+
+.wrapper {
+  height: auto !important;
+}
+
+.my-card {
+  margin: 1vw;
+}

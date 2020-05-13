@@ -20,7 +20,7 @@ const NewOrderCard = () => {
                     Loan Amount:
                     <div class="input-field inline">
                       <input id="loan_amount" type="text" class="validate" />
-                      <label for="loan_amount">Amount</label>
+                      <label htmlFor="loan_amount">Amount</label>
                       <span class="helper-text" data-error="wrong" data-success="right">How much you would like to receive as loan</span>
                     </div>
                   </div>
@@ -30,7 +30,7 @@ const NewOrderCard = () => {
                     Monthly interest:
                     <div class="input-field inline">
                       <input id="monthly_interest" type="text" class="validate" />
-                      <label for="monthly_interest">Percentage</label>
+                      <label htmlFor="monthly_interest">Percentage</label>
                     </div>
                   </div>
                 </div>
@@ -39,7 +39,7 @@ const NewOrderCard = () => {
                     Total Loan Period:
                     <div class="input-field inline">
                       <input id="loan_period_months" type="text" class="validate" />
-                      <label for="loan_period_months">Months</label>
+                      <label htmlFor="loan_period_months">Months</label>
                     </div>
                   </div>
                 </div>

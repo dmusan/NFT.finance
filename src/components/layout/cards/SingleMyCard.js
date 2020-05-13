@@ -4,27 +4,28 @@ import IMG_001 from "../../../assets/img/001.png"
 
 class SingleMyCard extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="col s3 m3">
         <div className="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src={IMG_001} />
+            <img class="activator" src={this.props.nft.image_url} />
           </div>
           <div className="card-content">
-            <i class ="material-icons large">aspect ratio</i>
-            <p>smth</p>
+            <h5>{this.props.nft.name}</h5>
           </div>
           <div class="card-action">
-            <a class="btn modal-trigger" href="#modal1">Modal</a>
+            <a class="btn modal-trigger" href="#modal1">Use as collateral</a>
           </div>
           <div class="card-reveal">
             <div class="card-title grey-text text-darken-4">
-              {this.props.nft.type}
+              {this.props.nft.name}
               <i class="material-icons right">close</i>
             </div>
             <div class="">
-              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+              <p>{this.props.nft.description}</p>
+              <p>Create by: {this.props.nft.asset_contract.name}</p>
+              <p>Number of sales in the past: {this.props.nft.sell_orders.length}</p>
+              <p>Find out more about this asset and check its history on <a href={this.props.nft.permalink}>OpenSea</a></p>
             </div>
           </div>
         </div>

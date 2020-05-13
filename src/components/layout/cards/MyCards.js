@@ -13,7 +13,6 @@ class MyCards extends Component {
     ) : (
       <div class="center">No NFTs in your wallet</div>
     )
-    console.log(myNFTCards);
     return (
       <div className="row">
         {myNFTCards}

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios';
 
 class GetCardsFromWallet extends Component {
 
   constructor() {
     super();
-    this.getNFTsRequest = this.getNFTsRequest.bind(this);
   }
-
 
   getNFTsRequest() {
     try {
@@ -31,7 +30,7 @@ class GetCardsFromWallet extends Component {
 
   async componentDidMount() {
     const NFTs = this.getNFTsRequest().then(response => {
-      console.log(JSON.stringify(response))
+      this.props.addMyNFTs(response.data.assets)
     })
     .catch(error => {
       console.log(error)
@@ -41,10 +40,16 @@ class GetCardsFromWallet extends Component {
   render() {
     return(
       <div>
-       test
+
       </div>
     )
   }
 }
 
-export default GetCardsFromWallet;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMyNFTs: (nftsList) => { dispatch({'type': 'ADD_MY_NFTS', 'nftsList': nftsList}) }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(GetCardsFromWallet);

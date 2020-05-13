@@ -5,7 +5,12 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
-  console.log(action);
+  if (action.type === 'ADD_MY_NFTS') {
+    let newNFTs = action.nftsList;
+    return {
+      nfts: newNFTs
+    }
+  }
   return state;
 }
 

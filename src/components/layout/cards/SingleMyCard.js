@@ -25,7 +25,7 @@ class SingleMyCard extends Component {
               <p>{this.props.nft.description}</p>
               <p>Create by: {this.props.nft.asset_contract.name}</p>
               <p>Number of sales in the past: {this.props.nft.sell_orders.length}</p>
-              <p>Find out more about this asset and check its history on <a href={this.props.nft.permalink}>OpenSea</a></p>
+              <p>Find out more about this asset and check its history on <a target="_blank" href={this.props.nft.permalink}>OpenSea</a></p>
             </div>
           </div>
         </div>

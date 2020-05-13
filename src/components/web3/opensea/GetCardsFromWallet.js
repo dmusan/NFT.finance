@@ -18,7 +18,7 @@ class GetCardsFromWallet extends Component {
         params: {
           order_direction: 'desc',
           offset: '0',
-          owner: '0xd20c29f34ee11ef39b0F14c3dfBc86833dd1d04B',
+          owner: '0xdab358a421f4f911cda7f1514f89e22db0e438cf',
         }
       })
       return response;

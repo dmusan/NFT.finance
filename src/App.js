@@ -7,10 +7,10 @@ import HomePage from './components/layout/home/HomePage'
 import NewOrderPage from './components/layout/neworder/NewOrderPage'
 import MyOrdersPage from './components/layout/myorders/MyOrdersPage'
 import AllOrdersPage from './components/layout/allorders/AllOrdersPage'
-
+import GetCardsFromWallet from './components/web3/opensea/GetCardsFromWallet'
 
 class App extends Component {
-  
+
   render() {
     return (
       <BrowserRouter>
@@ -21,6 +21,7 @@ class App extends Component {
           <Route path='/allorders' component={AllOrdersPage} />
           <Route path='/' component={HomePage} />
         </Switch>
+        <GetCardsFromWallet />
       </BrowserRouter>
     );
   }

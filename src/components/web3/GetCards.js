@@ -7,6 +7,15 @@ import IMG_007 from './assets/img/007.png'
 const CONTRACT_ADDRESS = '0xf98b18f2b4F5EEB07cD1FE5E93936234cbEa023E'
 const IMGS = [IMG_001, IMG_004, IMG_007]
 
+/*
+
+https://api.opensea.io/api/v1/assets/?owner=0xdab358a421f4f911cda7f1514f89e22db0e438cf&order_direction=desc&offset=0&limit=20
+
+https://api.opensea.io/api/v1/assets/?owner=0xd20c29f34ee11ef39b0F14c3dfBc86833dd1d04B&order_direction=desc&offset=0&limit=20
+
+*/
+
+
 async function getAccounts() {
   return window.ethereum.enable()
 }

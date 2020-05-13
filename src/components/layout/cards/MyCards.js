@@ -4,8 +4,8 @@ import SingleMyCard from "./SingleMyCard"
 import { connect } from 'react-redux'
 
 class MyCards extends Component {
+  
   render() {
-    // console.log(this.props.nfts);
     const myNFTCards =  this.props.nfts.length ? (
       this.props.nfts.map(nft =>
         <SingleMyCard nft={nft} />

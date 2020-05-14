@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import '../../../css/mystyles.css'
-import IMG_001 from "../../../assets/img/001.png"
 
 class SingleMyCard extends Component {
   render() {

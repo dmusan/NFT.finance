@@ -10,14 +10,17 @@ async function getAccounts() {
 
 async function getAllLendingOffers(web3, account) {
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, { from: account });
-  const lendingOffersNumberPromise = parseInt(await crt.methods.getNumberOfLendingOffers().call());
-  return lendingOffersNumberPromise;
+
+  const lendingOffersNumberPromise = parseInt(await crt.methods.totalLendingOffers().call())
+  return Promise.all([...Array(lendingOffersNumberPromise + 1).keys()].map(
+    id => crt.methods.allLendingOffers(id).call()
+  ))
 }
 
 
 class GetLendingOffers extends Component {
-  state ={
-    totalOffers: 0,
+  state = {
+    lendingOffers: [],
   };
 
   componentDidMount() {
@@ -26,9 +29,7 @@ class GetLendingOffers extends Component {
         this._getAccounts = null;
         this._web3 = new Web3(window.ethereum);
         this._account = accounts[0];
-        getAllLendingOffers(this._web3, this._account).then(
-          n => this.setState({totalOffers: n})
-        );
+        this.refreshLendingOffers();
       }
     );
   }
@@ -38,25 +39,31 @@ class GetLendingOffers extends Component {
       this._getAccounts.cancel();
     }
 
-    // if (this._getCards) {
-    //   this._getCards.cancel();
-    // }
+    if (this._getAllLendingOffers) {
+      this._getAllLendingOffers.cancel();
+    }
   }
-  //
-  // refreshLendingOffers() {
-  //   this._getCards = getCards(this._web3, this._account).then(
-  //     _cards => {
-  //       this._getCards = null
-  //       this.setState({cards: _cards})
-  //     }
-  //   )
-  // }
+
+  refreshLendingOffers() {
+    this._getAllLendingOffers = getAllLendingOffers(this._web3, this._account).then(
+      _lendingOffers => {
+        this._getAllLendingOffers = null
+        this.setState({ lendingOffers: _lendingOffers })
+      }
+    )
+  }
 
   render() {
-    const off = this.state.totalOffers;
+    const lendingOffersView = this.state.lendingOffers.map(offer =>
+      <div>
+        {offer.lendingID}
+        {console.log(this.state.lendingOffers)}
+      </div>
+    )
+
     return (
         <div>State
-          { off }
+          { lendingOffersView }
         </div>
     );
   }

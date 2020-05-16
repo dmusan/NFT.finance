@@ -17,10 +17,10 @@ const HomeCard = () => {
             <br/>
           </div>
           <div class="card-action">
-            <NavLink to='/neworder'>Place new order</NavLink>
+            <NavLink to='/neworder'>Place New Loan Request</NavLink>
           </div>
           <div class="card-action">
-            <NavLink to='/allorders'>View all pending orders</NavLink>
+            <NavLink to='/allorders'>View All Loans</NavLink>
           </div>
         </div>
       </div>

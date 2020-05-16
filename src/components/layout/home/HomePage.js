@@ -8,6 +8,7 @@ const HomePage = () => {
   return (
     <div className="valign-wrapper vertical-wrapper">
       <HomeCard />
+      { /* TODO: remove GetLendingOffers */}
       <GetLendingOffers />
     </div>
   )

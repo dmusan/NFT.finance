@@ -1,6 +1,8 @@
 import React from 'react'
 import SingleOrder from './SingleOrder'
 
+/* TODO: delete later, not needed */
+
 const MyOrdersList = () => {
   return (
     <div>

@@ -4,9 +4,10 @@ const initState = {
   ],
   offers: [
     {"borrower":"0x0000000000000000000000000000000000000000", "collateralAmount": "0", "lender": "0x0000000000000000000000000000000000000000", "lendingID": "0",
-    "lendingPrice": "0", "maxLendingTimeStamp": "0", "smartContractAddressOfNFT": "0x0000000000000000000000000000000000000000", "tokenIdNFT": "0",
+    "lendingPrice": "0", "maxLendingTimeStamp": "0", "smartContractAddressOfNFT": "0x775e90a06a3d908940ec326924262b37943aa140", "tokenIdNFT": "183",
     },
   ],
+  assetsForOffers: [],
 }
 
 const rootReducer = (state = initState, action) => {
@@ -14,13 +15,22 @@ const rootReducer = (state = initState, action) => {
     let newNFTs = action.nftsList;
     return {
       nfts: newNFTs,
-      offers: state.offers
+      offers: state.offers,
+      assetsForOffers: state.assetsForOffers
     }
   } else if (action.type === 'ADD_ALL_OFFERS') {
     let newOffers = action.allOffers;
     return {
       nfts: state.nfts,
-      offers: newOffers
+      offers: newOffers,
+      assetsForOffers: state.assetsForOffers
+    }
+  } else if (action.type === 'ADD_NEW_ASSETS') {
+    let newAssetsForOffers = [ ...state.assetsForOffers, action.newAsset];
+    return {
+      nfts: state.nfts,
+      offers: state.offers,
+      assetsForOffers: newAssetsForOffers
     }
   }
   return state;

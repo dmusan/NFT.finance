@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import '../../../css/mystyles.css'
 import SingleOrder from "./SingleOrder"
+import GetOffersAssets from '../../web3/opensea/GetOffersAssets'
 
 class AllOffers extends Component {
 
@@ -21,6 +22,7 @@ class AllOffers extends Component {
     return (
       <div className="row">
         {offersList}
+        <GetOffersAssets />
       </div>
     )
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Web3 from 'web3'
 import contractInterface from '../../contractsInterfaces/LendNFT.json'
 
@@ -10,7 +11,6 @@ async function getAccounts() {
 
 async function getAllLendingOffers(web3, account) {
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, { from: account });
-
   const lendingOffersNumberPromise = parseInt(await crt.methods.totalLendingOffers().call())
   return Promise.all([...Array(lendingOffersNumberPromise + 1).keys()].map(
     id => crt.methods.allLendingOffers(id).call()
@@ -49,6 +49,7 @@ class GetLendingOffers extends Component {
       _lendingOffers => {
         this._getAllLendingOffers = null
         this.setState({ lendingOffers: _lendingOffers })
+        this.props.addAllOffers(this.state.lendingOffers)
       }
     )
   }
@@ -57,7 +58,6 @@ class GetLendingOffers extends Component {
     const lendingOffersView = this.state.lendingOffers.map(offer =>
       <div>
         {offer.lendingID}
-        {console.log(this.state.lendingOffers)}
       </div>
     )
 
@@ -69,4 +69,10 @@ class GetLendingOffers extends Component {
   }
 }
 
-export default GetLendingOffers;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addAllOffers: (allOffers) => { dispatch({'type': 'ADD_ALL_OFFERS', 'allOffers': allOffers}) }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(GetLendingOffers);

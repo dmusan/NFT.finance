@@ -1,5 +1,5 @@
 import React from 'react'
-import MyOrdersList from '../order/MyOrdersList'
+import AllOffers from '../order/AllOffers'
 import '../../../css/mystyles.css'
 
 const MyOrdersPage = () => {
@@ -14,7 +14,7 @@ const MyOrdersPage = () => {
           <p><b>Defaulted</b></p>
         </div>
         <div class='col s12 m8'>
-          <MyOrdersList />
+          <AllOffers offersFilterLender={""} offersFilterBorrower={""}/>
         </div>
       </div>
     </div>

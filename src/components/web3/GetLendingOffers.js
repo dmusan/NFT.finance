@@ -58,6 +58,7 @@ class GetLendingOffers extends Component {
     const lendingOffersView = this.state.lendingOffers.map(offer =>
       <div>
         {offer.lendingID}
+        {console.log(this.state.lendingOffers)}
       </div>
     )
 

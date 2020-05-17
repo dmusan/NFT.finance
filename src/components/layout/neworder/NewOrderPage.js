@@ -1,7 +1,6 @@
 import React from 'react'
 import NewOrderCard from './NewOrderCard'
 import MyCards from '../cards/MyCards'
-import ModalOrder from './ModalOrder'
 import '../../../css/mystyles.css'
 
 const NewOrderPage = () => {
@@ -11,7 +10,6 @@ const NewOrderPage = () => {
       <div className="wrapper">
         <MyCards />
       </div>
-      <ModalOrder />
     </div>
   )
 }

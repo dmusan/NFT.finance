@@ -1,9 +1,18 @@
 import React, {Component} from 'react'
 import '../../../css/mystyles.css'
+import NewOrderCard from '../neworder/NewOrderCard'
+import M from "materialize-css";
 
 class SingleMyCard extends Component {
+
+  componentDidMount() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  }
+
   render() {
     return (
+
       <div className="col s3 m3">
         <div className="card">
           <div class="card-image waves-effect waves-block waves-light">
@@ -13,7 +22,7 @@ class SingleMyCard extends Component {
             <h5>{this.props.nft.name}</h5>
           </div>
           <div class="card-action">
-            <a class="btn modal-trigger" href="#modal1">Use as collateral</a>
+            <a class="btn modal-trigger" href={"#modal" + this.props.nft.token_id+ this.props.nft.asset_contract.address}>Use for loan</a>
           </div>
           <div class="card-reveal">
             <div class="card-title grey-text text-darken-4">
@@ -28,7 +37,19 @@ class SingleMyCard extends Component {
             </div>
           </div>
         </div>
+        <div className="center-align">
+          <div id={"modal" + this.props.nft.token_id+ this.props.nft.asset_contract.address} class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4><b>{this.props.nft.name}</b></h4>
+              <NewOrderCard nft={this.props.nft}/>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+          </div>
+        </div>
       </div>
+
     )
   }
 }

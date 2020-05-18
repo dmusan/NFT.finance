@@ -1,10 +1,12 @@
 import React from 'react'
 import AllOffers from '../order/AllOffers'
+import GetLendingOffers from '../../web3/GetLendingOffers.js'
 import '../../../css/mystyles.css'
 
 const MyOrdersPage = () => {
   return (
     <div class="container margin-container">
+      <GetLendingOffers />
       <div class='row'>
         <div class='col s12 m4'>
           <p>Filter by:</p>

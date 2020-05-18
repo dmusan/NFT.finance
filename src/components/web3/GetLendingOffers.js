@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Web3 from 'web3'
 import contractInterface from '../../contractsInterfaces/LendNFT.json'
 
-const CONTRACT_ADDRESS = '0x2efe27fe87eeDFC26d4a931d4b7A74E641E061f3'
+const CONTRACT_ADDRESS = '0xc809Bec0a507C6e4bd5990568c99541a237DbBc4'
 
 async function getAccounts() {
   return window.ethereum.enable()
@@ -34,15 +34,15 @@ class GetLendingOffers extends Component {
     );
   }
 
-  componentWillUnmount() {
-    if (this._getAccounts) {
-      this._getAccounts.cancel();
-    }
-
-    if (this._getAllLendingOffers) {
-      this._getAllLendingOffers.cancel();
-    }
-  }
+  // componentWillUnmount() {
+  //   if (this._getAccounts) {
+  //     this._getAccounts.cancel();
+  //   }
+  //
+  //   if (this._getAllLendingOffers) {
+  //     this._getAllLendingOffers.cancel();
+  //   }
+  // }
 
   refreshLendingOffers() {
     this._getAllLendingOffers = getAllLendingOffers(this._web3, this._account).then(

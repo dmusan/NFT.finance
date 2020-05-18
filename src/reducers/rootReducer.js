@@ -8,6 +8,7 @@ const initState = {
     },
   ],
   assetsForOffers: [],
+  userAddress: {"address": "0x0000000000000000000000000000000000000000"},
 }
 
 const rootReducer = (state = initState, action) => {
@@ -16,23 +17,27 @@ const rootReducer = (state = initState, action) => {
     return {
       nfts: newNFTs,
       offers: state.offers,
-      assetsForOffers: state.assetsForOffers
+      assetsForOffers: state.assetsForOffers,
+      userAddress: state.userAddress,
     }
   } else if (action.type === 'ADD_ALL_OFFERS') {
     let newOffers = action.allOffers;
     return {
       nfts: state.nfts,
       offers: newOffers,
-      assetsForOffers: state.assetsForOffers
+      assetsForOffers: state.assetsForOffers,
+      userAddress: state.userAddress,
     }
   } else if (action.type === 'ADD_NEW_ASSETS') {
     let newAssetsForOffers = [ ...state.assetsForOffers, action.newAsset];
     return {
       nfts: state.nfts,
       offers: state.offers,
-      assetsForOffers: newAssetsForOffers
+      assetsForOffers: newAssetsForOffers,
+      userAddress: state.userAddress,
     }
   }
+  // TODO: add action to add userAddress from web3
   return state;
 }
 

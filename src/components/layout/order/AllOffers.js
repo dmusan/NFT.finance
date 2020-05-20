@@ -21,8 +21,8 @@ class AllOffers extends Component {
     )
     return (
       <div className="row">
-        {offersList}
         <GetOffersAssets />
+        {offersList}
       </div>
     )
   }

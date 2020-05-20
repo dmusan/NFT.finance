@@ -10,7 +10,7 @@ class GetCardsFromWallet extends Component {
 
   getNFTsRequest() {
     try {
-      const response = axios.get('https://api.opensea.io/api/v1/assets/', {
+      const response = axios.get('https://rinkeby-api.opensea.io/api/v1/assets/', {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -18,9 +18,9 @@ class GetCardsFromWallet extends Component {
         params: {
           order_direction: 'desc',
           offset: '0',
-          owner: '0xd20c29f34ee11ef39b0F14c3dfBc86833dd1d04B',
+          owner: this.props.userAddress,
         }
-      })
+      });
       return response;
     } catch (error) {
       console.error(error);
@@ -28,16 +28,13 @@ class GetCardsFromWallet extends Component {
     }
   }
 
-  async componentDidMount() {
+  render() {
     const NFTs = this.getNFTsRequest().then(response => {
       this.props.addMyNFTs(response.data.assets)
     })
     .catch(error => {
       console.log(error)
-    })
-  }
-
-  render() {
+    });
     return(
       <div>
 
@@ -46,10 +43,16 @@ class GetCardsFromWallet extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    addMyNFTs: (nftsList) => { dispatch({'type': 'ADD_MY_NFTS', 'nftsList': nftsList}) }
+    userAddress: state.userAddress
   }
 }
 
-export default connect(null, mapDispatchToProps)(GetCardsFromWallet);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMyNFTs: (nftsList) => { dispatch({'type': 'ADD_MY_NFTS', 'nftsList': nftsList}) },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GetCardsFromWallet);

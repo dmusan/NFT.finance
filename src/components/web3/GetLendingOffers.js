@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Web3 from 'web3'
 import contractInterface from '../../contractsInterfaces/LendNFT.json'
 
-const CONTRACT_ADDRESS = '0xc809Bec0a507C6e4bd5990568c99541a237DbBc4'
+const CONTRACT_ADDRESS = '0x8693e34CDa0Dc04289399cad57822928EEc5CF6b'
 
 async function getAccounts() {
   return window.ethereum.enable()

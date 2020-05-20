@@ -4,7 +4,7 @@ import IMG_001 from './assets/img/001.png'
 import IMG_004 from './assets/img/004.png'
 import IMG_007 from './assets/img/007.png'
 
-const CONTRACT_ADDRESS = '0xf98b18f2b4F5EEB07cD1FE5E93936234cbEa023E'
+const CONTRACT_ADDRESS = '0x8693e34CDa0Dc04289399cad57822928EEc5CF6b'
 const IMGS = [IMG_001, IMG_004, IMG_007]
 
 /*

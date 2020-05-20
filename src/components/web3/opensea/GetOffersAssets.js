@@ -28,7 +28,7 @@ class GetOffersAssets extends Component {
 
   getAssetRequest = (contractAddress, tokenIdNFT) => {
     try {
-      const response = axios.get("https://api.opensea.io/api/v1/asset/" + contractAddress + "/" + tokenIdNFT)
+      const response = axios.get("https://rinkeby-api.opensea.io/api/v1/asset/" + contractAddress + "/" + tokenIdNFT)
       return response;
     } catch (error) {
       console.error(error);

@@ -36,8 +36,15 @@ const rootReducer = (state = initState, action) => {
       assetsForOffers: newAssetsForOffers,
       userAddress: state.userAddress,
     }
+  } else if (action.type === 'ADD_USER_ADDRESS') {
+    let newUserAddress = action.userAddress;
+    return {
+      nfts: state.nfts,
+      offers: state.offers,
+      assetsForOffers: state.assetsForOffers,
+      userAddress: newUserAddress,
+    }
   }
-  // TODO: add action to add userAddress from web3
   return state;
 }
 

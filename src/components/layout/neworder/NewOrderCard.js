@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Web3 from 'web3'
 import contractInterface from '../../../contractsInterfaces/LendNFT.json'
+import erc721ContractInterface from '../../../contractsInterfaces/erc721.json'
 
 // TODO: replace
 const CONTRACT_ADDRESS = '0x8693e34CDa0Dc04289399cad57822928EEc5CF6b'
@@ -16,8 +17,8 @@ class NewOrderCard extends Component {
   // State will get some of the deatils from changes to input components
   state = {
       collateralAmount: '',
-      priceToBorrow: '',
-      loanPeriod: '',
+      lendingPrice: '',
+      lendinPeriod: '',
   }
 
   // In props we will receive the userAddress from the reducer
@@ -36,28 +37,27 @@ class NewOrderCard extends Component {
     );
   }
 
-  lendNFT = () => {
-    console.log(this.state.collateralAmount)
-    console.log(this.state.priceToBorrow)
-    console.log(this.state.loanPeriod)
-    console.log(this.props.nft.token_id)
-    console.log(this.props.nft.asset_contract.address)
-    console.log(this._account)
-    console.log(this.props.userAddress)
-    console.log(contractInterface)
-    console.log(CONTRACT_ADDRESS)
-
-    const crt = new this._web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: this._account})
-    console.log(crt.options)
+  lendNFT = (e) => {
+    e.preventDefault();
+    const ethCollateralAmount = this._web3.utils.toWei(this.state.collateralAmount);
+    const ethLendingPrice = this._web3.utils.toWei(this.state.lendingPrice);
+    const crt = new this._web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: this._account});
     crt.methods.createLendingOffer(
-      this._account,
       this.props.nft.asset_contract.address,
       this.props.nft.token_id,
-      this.state.collateralAmount,
-      this.state.priceToBorrow,
-      this.state.loanPeriod
+      ethCollateralAmount,
+      ethLendingPrice,
+      this.state.lendinPeriod * 3600
     ).send().on('confirmation', () => {
       console.log("added to blockchain")
+    })
+  }
+
+  approveNFT = (e) => {
+    e.preventDefault();
+    const erc721crt = new this._web3.eth.Contract(erc721ContractInterface, this.props.nft.asset_contract.address, {from: this._account});
+    erc721crt.methods.approve(CONTRACT_ADDRESS, this.props.nft.token_id).send().on('confirmation', () => {
+      console.log("approvedNFT")
     })
   }
 
@@ -91,7 +91,7 @@ class NewOrderCard extends Component {
                     <div class="col s12">
                       Price to borrow:
                       <div class="input-field inline">
-                        <input id="monthly_interest" type="text" class="validate" name="priceToBorrow" onChange={this.handleChange}/>
+                        <input id="monthly_interest" type="text" class="validate" name="lendingPrice" onChange={this.handleChange}/>
                         <label htmlFor="monthly_interest">Amount in ETH</label>
                       </div>
                     </div>
@@ -100,16 +100,22 @@ class NewOrderCard extends Component {
                     <div class="col s12">
                       Total Loan Period:
                       <div class="input-field inline">
-                        <input id="loan_period_months" type="text" class="validate" name="loanPeriod" onChange={this.handleChange} />
-                        <label htmlFor="loan_period_months">Days</label>
+                        <input id="loan_period_months" type="text" class="validate" name="lendinPeriod" onChange={this.handleChange} />
+                        <label htmlFor="loan_period_months">Hours</label>
                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      You must first approve the transfer of the NFT:
+                      <button onClick={this.approveNFT}>Approve transfer</button>
                     </div>
                   </div>
                 </div>
               </form>
             </div>
             <div class="card-action">
-              <button className="button" onClick={this.lendNFT}>Place new order</button>
+              <button onClick={this.lendNFT}>Place new order</button>
             </div>
           </div>
         </div>

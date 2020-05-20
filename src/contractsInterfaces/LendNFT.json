@@ -1,46 +1,21 @@
 [
 	{
-		"inputs": [
-			{
-				"internalType": "address payable",
-				"name": "prevOwnerAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "smartContractAddressOfNFT",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenIdNFT",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "collateralAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "lendingPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "maxLendingTimeStamp",
-				"type": "uint256"
-			}
-		],
-		"name": "createLendingOffer",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "lendingOfferID",
+				"type": "uint256"
+			}
+		],
+		"name": "acceptLendingOffer",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -89,21 +64,18 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "maxLendingTimeStamp",
+				"name": "lendinPeriod",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getNumberOfLendingOffers",
-		"outputs": [
+			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "endLendingTimeStamp",
 				"type": "uint256"
+			},
+			{
+				"internalType": "enum LendNFT.Status",
+				"name": "status",
+				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -113,16 +85,69 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "id",
+				"name": "lendingOfferID",
 				"type": "uint256"
 			}
 		],
-		"name": "getOneLendingOffer",
-		"outputs": [
+		"name": "cancelLendingOffer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "smartContractAddressOfNFT",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenIdNFT",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "collateralAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lendingPrice",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "lendinPeriod",
+				"type": "uint256"
+			}
+		],
+		"name": "createLendingOffer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "lendingOfferID",
+				"type": "uint256"
+			}
+		],
+		"name": "endLendingOffer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -139,6 +164,40 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "onERC721Received",
+		"outputs": [
+			{
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

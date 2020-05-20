@@ -1,6 +1,7 @@
 import React from 'react'
 import AllOffers from '../order/AllOffers'
 import GetLendingOffers from '../../web3/GetLendingOffers.js'
+import GetOffersAssets from '../../web3/opensea/GetOffersAssets'
 import '../../../css/mystyles.css'
 
 const MyOrdersPage = () => {
@@ -16,6 +17,7 @@ const MyOrdersPage = () => {
           <p><b>Defaulted</b></p>
         </div>
         <div class='col s12 m8'>
+          <GetOffersAssets />
           <AllOffers offersFilterLender={""} offersFilterBorrower={""}/>
         </div>
       </div>

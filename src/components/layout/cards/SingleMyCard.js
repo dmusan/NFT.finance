@@ -22,7 +22,7 @@ class SingleMyCard extends Component {
             <h5>{this.props.nft.name}</h5>
           </div>
           <div class="card-action">
-            <a class="btn modal-trigger" href={"#modal" + this.props.nft.token_id+ this.props.nft.asset_contract.address}>Use for loan</a>
+            <a class="btn modal-trigger" href={"#modal" + this.props.nft.token_id+ this.props.nft.asset_contract.address}>Use this NFT</a>
           </div>
           <div class="card-reveal">
             <div class="card-title grey-text text-darken-4">

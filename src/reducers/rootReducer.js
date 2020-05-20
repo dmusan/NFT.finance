@@ -42,7 +42,7 @@ const rootReducer = (state = initState, action) => {
       nfts: state.nfts,
       offers: state.offers,
       assetsForOffers: state.assetsForOffers,
-      userAddress: newUserAddress,
+      userAddress: {"address": newUserAddress},
     }
   }
   return state;

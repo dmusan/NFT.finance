@@ -18,7 +18,7 @@ class GetCardsFromWallet extends Component {
         params: {
           order_direction: 'desc',
           offset: '0',
-          owner: this.props.userAddress,
+          owner: this.props.userAddress.address,
         }
       });
       return response;

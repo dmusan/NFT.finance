@@ -44,6 +44,9 @@ contract LoansNFT is IERC721Receiver, Pausable {
     _;
   }
 
+  // TODO: add modifier for checking period values
+  // TODO: add modifier for checking price values
+
   constructor() public {
     manager = msg.sender;
     totalLoanRequests = 0;
@@ -100,6 +103,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
     // Send sumForLoan to borrower
     // NFT is kept by the loans smart contract
     allLoanRequests[loanID].borrower.transfer(sumForLoan);
+    allLoanRequests[loanID].maximumInterestPeriods--;
 
     allLoanRequests[loanID].lender = msg.sender;
     allLoanRequests[loanID].status = Status.ACTIVE;
@@ -115,11 +119,12 @@ contract LoansNFT is IERC721Receiver, Pausable {
     allLoanRequests[loanID].lender.transfer(allLoanRequests[loanID].interestAmount);
 
     allLoanRequests[loanID].maximumInterestPeriods--;
-    allLoanRequests[loanID].endLoanTimeStamp = now + allLoanRequests[loanID].singlePeriodTime;
+    allLoanRequests[loanID].endLoanTimeStamp += allLoanRequests[loanID].singlePeriodTime;
   }
 
-  function endLoanRequest(uint loanID) public isValidLoanID(loanID) {
+  function endLoanRequest(uint loanID) payable public isValidLoanID(loanID) {
     require(allLoanRequests[loanID].status == Status.ACTIVE, "Status is not ACTIVE to end loan");
+    // TODO: add message to require
     require((msg.sender == allLoanRequests[loanID].lender  &&
             now >= allLoanRequests[loanID].endLoanTimeStamp) || msg.sender == allLoanRequests[loanID].borrower);
 

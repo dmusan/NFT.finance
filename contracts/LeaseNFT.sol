@@ -43,6 +43,9 @@ contract LeaseNFT is IERC721Receiver, Pausable {
     _;
   }
 
+  // TODO: add modifier for checking period values
+  // TODO: add modifier for checking price values
+
   constructor() public {
     manager = msg.sender;
     totalLeaseOffers = 0;

@@ -48,6 +48,12 @@ class GetLendingOffers extends Component {
     this._getAllLendingOffers = getAllLendingOffers(this._web3, this._account).then(
       _lendingOffers => {
         this._getAllLendingOffers = null
+        _lendingOffers = _lendingOffers.map((lendingOffer) => {
+          lendingOffer.lender = lendingOffer.lender.toLowerCase();
+          lendingOffer.borrower = lendingOffer.borrower.toLowerCase();
+          lendingOffer.smartContractAddressOfNFT = lendingOffer.smartContractAddressOfNFT.toLowerCase();
+          return lendingOffer;
+        });
         this.setState({ lendingOffers: _lendingOffers })
         this.props.addAllOffers(this.state.lendingOffers)
       }

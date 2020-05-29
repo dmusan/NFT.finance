@@ -37,7 +37,8 @@ contract LendNFT is IERC721Receiver {
   constructor() public {
     manager = msg.sender;
   }
-
+    // Equivalent to 'bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))'
+    // Or 0x150b7a02
     function onERC721Received(address operator, address from, uint256 tokenId, bytes memory data) public override returns (bytes4) {
         return 0x150b7a02;
     }

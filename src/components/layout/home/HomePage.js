@@ -8,7 +8,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     window.ethereum.enable().then( accounts =>
-      this.props.addUserAddress(accounts[0]),
+      this.props.addUserAddress(accounts[0].toLowerCase()),
     );
   }
 

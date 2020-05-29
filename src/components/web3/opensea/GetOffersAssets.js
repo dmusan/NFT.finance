@@ -5,6 +5,10 @@ import axios from 'axios';
 class GetOffersAssets extends Component {
 
   async componentDidMount() {
+    this.getAllOffersAssets();
+  }
+
+  getAllOffersAssets = () => {
     // For each offer in the smart contract retrieve the assets from OpenSea
     const newAssets = this.props.offers.map(offer => {
         // Check if it is already loaded
@@ -37,9 +41,9 @@ class GetOffersAssets extends Component {
   }
 
   assetAlreadyLoaded = (contractAddress, tokenIdNFT) => {
-    return (this.props.assetsForOffers.filter(offerAsset =>
-      offerAsset.token_id == tokenIdNFT && offerAsset.asset_contract.address == contractAddress
-    ).length > 0)
+    return (this.props.assetsForOffers.filter(offerAsset => {
+      return offerAsset.token_id === tokenIdNFT && offerAsset.asset_contract.address === contractAddress
+    }).length > 0)
   }
 }
 

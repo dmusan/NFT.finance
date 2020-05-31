@@ -4,9 +4,9 @@ import axios from 'axios';
 
 class GetCardsFromWallet extends Component {
 
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
 
   // getNFTsRequest() {
   //   try {
@@ -43,16 +43,16 @@ class GetCardsFromWallet extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userAddress: state.userAddress
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     userAddress: state.userAddress
+//   }
+// }
+//
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addMyNFTs: (nftsList) => { dispatch({'type': 'ADD_MY_NFTS', 'nftsList': nftsList}) },
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addMyNFTs: (nftsList) => { dispatch({'type': 'ADD_MY_NFTS', 'nftsList': nftsList}) },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GetCardsFromWallet);
+export default /* connect(mapStateToProps, mapDispatchToProps) */ (GetCardsFromWallet);

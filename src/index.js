@@ -13,7 +13,7 @@ const store = createStore(rootReducer);
 const store2 = createStore(rootReducer2, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store2}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

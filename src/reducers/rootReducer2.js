@@ -1,12 +1,12 @@
 import accountReducer from './accountReducer'
 import leaseReducer from './leaseReducer'
-import lendReducer from './lendReducer'
+import loanReducer from './loanReducer'
 import { combineReducers } from 'redux'
 
 const rootReducer2 = combineReducers({
   account: accountReducer,
-  leaseOffers: leaseReducer,
-  lendRequests: lendReducer
+  leasing: leaseReducer,
+  loans: loanReducer
 });
 
 export default rootReducer2;

@@ -3,14 +3,20 @@ import { connect } from 'react-redux'
 import Web3 from 'web3'
 import HomeCard from './HomeCard'
 import '../../../css/mystyles.css'
+import { getAccountAddress, getAccountAssetAction } from '../../../actions/accountActions'
 
 class HomePage extends Component {
 
   componentDidMount() {
-    window.ethereum.enable().then( accounts =>
-      this.props.addUserAddress(accounts[0].toLowerCase()),
-    );
+    this.props.getAccountAddress();
   }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.userAddress !== this.props.userAddress) {
+      this.props.getAccountAssetAction(this.props.userAddress);
+    }
+  }
+
 
   render() {
     return (
@@ -21,10 +27,18 @@ class HomePage extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    addUserAddress: (userAddress) => { dispatch({'type': 'ADD_USER_ADDRESS', 'userAddress': userAddress}) }
+    userAddress: state.account.accountAddress.address,
   }
 }
 
-export default connect(null, mapDispatchToProps)(HomePage);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAccountAddress: () => dispatch(getAccountAddress()),
+    getAccountAssetAction: (address) => dispatch(getAccountAssetAction(address))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -19,19 +19,19 @@ class NavbarLinks extends Component {
     return (
       <div>
         <ul id="nav-dropdown-leasing" className="dropdown-content">
-          <li><NavLink to='/allorders' className='indigo-text'>New Lease Offer</NavLink></li>
+          <li><NavLink to='/newlease' className='indigo-text text-darken-4'>New Lease Offer</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text'>My Lease Offers</NavLink></li>
+          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>My Lease Offers</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text'>All Lease Offers</NavLink></li>
+          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>All Lease Offers</NavLink></li>
         </ul>
 
         <ul id="nav-dropdown-lending" className="dropdown-content">
-          <li><NavLink to='/allorders' className='indigo-text'>New Loan Request</NavLink></li>
+          <li><NavLink to='/allorders' className='indigo-text text-darken-4'>New Loan Request</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text'>My Loan Requests</NavLink></li>
+          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>My Loan Requests</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text'>All Loan Requests</NavLink></li>
+          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>All Loan Requests</NavLink></li>
         </ul>
 
         <ul className="right">
@@ -58,7 +58,7 @@ class NavbarLinks extends Component {
             </a>
           </li>
           <li><NavLink to='/'>Chat</NavLink></li>
-          <li><NavLink to='/' className='amber-text'>Docs</NavLink></li>
+          <li><NavLink to='/' className='amber-text text-lighten-1'>Docs</NavLink></li>
         </ul>
       </div>
     )

@@ -18,7 +18,9 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "rimble-ui": "^0.14.0",
     "solc": "^0.6.7",
+    "styled-components": "^5.1.1",
     "web3": "^1.2.7"
   },
   "scripts": {

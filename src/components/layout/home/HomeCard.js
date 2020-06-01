@@ -3,24 +3,26 @@ import { NavLink } from 'react-router-dom'
 
 const HomeCard = () => {
   return (
-    <div class="row">
-      <div class="col s12 m6 offset-m3">
-        <div class="card blue-grey center-align">
-          <div class="card-content white-text">
-            <span class="card-title">Get Started</span>
+    <div className="row">
+      <div className="col s12 m6 offset-m3">
+        <div className="card indigo lighten-1 center-align">
+          <div className="card-content white-text">
+            <span className="card-title white-text">Get Started</span>
             <br/>
             <p>
-              New users are advised to check the
-              <NavLink to='/docs' class="white-text bold"><b> docs</b></NavLink> first to take full advantage
-              of all the features
+              New users are encouraged to check the Docs
+              to take advantage of all the features and leverage their NFTs
             </p>
             <br/>
           </div>
-          <div class="card-action">
-            <NavLink to='/neworder'>Place New Loan Request</NavLink>
+          <div className="card-action">
+            <NavLink to='/' className="amber-text">Docs</NavLink>
           </div>
-          <div class="card-action">
-            <NavLink to='/allorders'>View All Loans</NavLink>
+          <div className="card-action">
+            <NavLink to='/' className="amber-text">Create Lease Offer</NavLink>
+          </div>
+          <div className="card-action">
+            <NavLink to='/' className="amber-text">Create Loan Request</NavLink>
           </div>
         </div>
       </div>

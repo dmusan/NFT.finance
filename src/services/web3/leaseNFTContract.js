@@ -20,7 +20,9 @@ export const getAllLeaseOffers = async (address) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, { from: address });
   const leaseOffersNumber = parseInt(await crt.methods.totalLendingOffers().call())
-  return Promise.all([...Array(leaseOffersNumber + 1).keys()].map(
-    id => crt.methods.allLendingOffers(id).call()
-  ))
+  return Promise.all(
+    [...Array(leaseOffersNumber + 1).keys()].map(
+      id => crt.methods.allLendingOffers(id).call()
+    )
+  )
 }

@@ -19,3 +19,25 @@ export const getAssetsOpensea = (account) => {
     return 0;
   }
 }
+
+export const getAllLeaseAssets = async (leaseOffers) => {
+  const leaseAssets =  leaseOffers.map( (offer) =>
+    getAssetRequest(offer.smartContractAddressOfNFT, offer.tokenIdNFT)
+  );
+  return Promise.all(
+    leaseOffers.map(
+      (offer) => getAssetRequest(offer.smartContractAddressOfNFT, offer.tokenIdNFT)
+    )
+  )
+  return leaseAssets;
+}
+
+export const getAssetRequest = async (contractAddress, tokenIdNFT) => {
+  try {
+    const response = axios.get("https://rinkeby-api.opensea.io/api/v1/asset/" + contractAddress + "/" + tokenIdNFT);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}

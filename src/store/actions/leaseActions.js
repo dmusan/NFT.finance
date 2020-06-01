@@ -1,9 +1,11 @@
 import { getAllLeaseOffers } from '../../services/web3/leaseNFTContract'
+import { getAllLeaseAssets } from '../../services/opensea/assets'
 
 export const getLeaseOffersAction = () => {
   return (dispatch, getState) => {
     getAllLeaseOffers().then( leaseOffers => {
-        leaseOffers.map( (leaseOffer) => {
+        // Change all addresses to lowercase
+        const updatedOffers = leaseOffers.map( (leaseOffer) => {
           // TODO change to lessor ?
             leaseOffer.lender = leaseOffer.lender.toLowerCase();
             // TODO change to lessee
@@ -13,9 +15,18 @@ export const getLeaseOffersAction = () => {
             return leaseOffer;
           }
         )
-        console.log(leaseOffers)
-        dispatch({ type: 'ADD_LEASE_OFFERS', leaseOffers: leaseOffers })
+        dispatch({ type: 'ADD_LEASE_OFFERS', leaseOffers: updatedOffers })
       }
     )
+  }
+}
+
+export const getLeaseAssetsAction = (leaseOffers) => {
+  return (dispatch, getState) => {
+    getAllLeaseAssets(leaseOffers).then( leaseAssets => {
+      // Extract data from API response
+      const updatedAssets = leaseAssets.map(leaseAsset => leaseAsset.data)
+      dispatch({ type: 'ADD_LEASE_ASSETS', leaseAssets: updatedAssets });
+    })
   }
 }

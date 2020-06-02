@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import M from "materialize-css"
 
+// TODO: move consts
 const OFFER_STATUS = ["Pending", "Active", "Cancelled", "Ended"];
 const DEFAULT_BORROWER = "0x0000000000000000000000000000000000000000";
 

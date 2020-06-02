@@ -35,6 +35,11 @@
   margin-left: 0.9vw;
 }
 
+.any-page-title-margin {
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+}
+
 .card-asset-content {
   margin-bottom: 7vh;
 }

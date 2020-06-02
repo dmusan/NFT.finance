@@ -4,6 +4,7 @@ import MyCards from '../cards/MyCards'
 import GetCardsFromWallet from '../../web3/opensea/GetCardsFromWallet'
 import '../../../css/mystyles.css'
 
+// TODO: delete
 const NewOrderPage = () => {
   return (
     <div className="container">

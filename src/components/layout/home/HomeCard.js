@@ -16,13 +16,13 @@ const HomeCard = () => {
             <br/>
           </div>
           <div className="card-action">
-            <NavLink to='/' className="amber-text text-lighten-1">Docs</NavLink>
+            <NavLink to='/' className="amber-text text-lighten-2">Docs</NavLink>
           </div>
           <div className="card-action">
-            <NavLink to='/' className="amber-text text-lighten-1">Create Lease Offer</NavLink>
+            <NavLink to='/' className="amber-text text-lighten-2">Create Lease Offer</NavLink>
           </div>
           <div className="card-action">
-            <NavLink to='/' className="amber-text text-lighten-1">Create Loan Request</NavLink>
+            <NavLink to='/' className="amber-text text-lighten-2">Create Loan Request</NavLink>
           </div>
         </div>
       </div>

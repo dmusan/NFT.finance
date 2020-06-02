@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import '../../../css/mystyles.css'
-// import NewOrderCard from '../neworder/NewOrderCard'
+import NewLeaseOfferCard from '../leasing/newlease/NewLeaseOfferCard'
 import M from "materialize-css";
 
 class SingleMyCard extends Component {
@@ -46,10 +46,9 @@ class SingleMyCard extends Component {
             </div>
           </div>
           <div className="center-align">
-            <div id={"modal" + this.props.nft.token_id+ this.props.nft.asset_contract.address} className="modal modal-fixed-footer">
+            <div id={"modal" + this.props.nft.token_id + this.props.nft.asset_contract.address} className="modal modal-fixed-footer">
               <div className="modal-content">
-                <h5 className="grey-text text-darken-3">{this.props.nft.name}</h5>
-                { /*<NewOrderCard nft={this.props.nft}/> */ }
+                <NewLeaseOfferCard nft={this.props.nft}/>
               </div>
               <div className="modal-footer">
                 <a href="#!" className="modal-close waves-effect waves-green btn-flat">Close</a>

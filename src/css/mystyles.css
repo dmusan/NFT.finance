@@ -39,6 +39,15 @@
   margin-bottom: 7vh;
 }
 
+.input-margins {
+  margin-right: 1vw;
+}
+
+.button-offer {
+  margin-top: 0.5vw;
+  width: 10vw;
+}
+
 img {
   padding: 1vw;
   width: auto;

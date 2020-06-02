@@ -21,7 +21,7 @@ class NavbarLinks extends Component {
         <ul id="nav-dropdown-leasing" className="dropdown-content">
           <li><NavLink to='/newlease' className='indigo-text text-darken-4'>New Lease Offer</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>My Lease Offers</NavLink></li>
+          <li><NavLink to="/myleaseoffers" className='indigo-text text-darken-4'>My Lease Offers</NavLink></li>
           <li className="divider"></li>
           <li><NavLink to="/allorders" className='indigo-text text-darken-4'>All Lease Offers</NavLink></li>
         </ul>

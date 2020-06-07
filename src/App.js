@@ -15,6 +15,8 @@ import GetCardsFromWallet from './components/web3/opensea/GetCardsFromWallet'
 import NewLeaseOffersPage from './components/layout/leasing/newlease/NewLeaseOfferPage'
 import MyLeaseOffers from './components/layout/leasing/offers/MyLeaseOffers'
 import AllLeaseOffersPage from './components/layout/leasing/offers/AllLeaseOffersPage'
+import NewLoanRequestPage from './components/layout/loans/newloan/NewLoanRequestPage'
+
 
 class App extends Component {
 
@@ -45,6 +47,7 @@ class App extends Component {
           <Route path='/newlease' component={NewLeaseOffersPage} />
           <Route path='/myleaseoffers' component={MyLeaseOffers} />
           <Route path='/allleaseoffers' component={AllLeaseOffersPage} />
+          <Route path='/newloan' component={NewLoanRequestPage} />
           <Route path='/' component={HomePage} />
         </Switch>
       </BrowserRouter>

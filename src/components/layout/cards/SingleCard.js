@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import '../../../css/mystyles.css'
 import NewLeaseOfferCard from '../leasing/newlease/NewLeaseOfferCard'
+import NewLoanRequestModalContent from '../loans/newloan/NewLoanRequestModalContent'
 import M from "materialize-css";
 
-class SingleMyCard extends Component {
+class SingleCard extends Component {
 
   componentDidMount() {
     var elems = document.querySelectorAll('.modal');
@@ -11,6 +12,13 @@ class SingleMyCard extends Component {
   }
 
   render() {
+    const modalContent = this.props.type === "lease" ? (
+      // TODO: rename to NewLeaseOfferModalContent
+      <NewLeaseOfferCard nft={this.props.nft} />
+    ) : (
+      <NewLoanRequestModalContent nft={this.props.nft} />
+    )
+
     return (
         <div className="col s6 m4">
           <div className="card my-card">
@@ -48,8 +56,7 @@ class SingleMyCard extends Component {
           <div className="center-align">
             <div id={"modal" + this.props.nft.token_id + this.props.nft.asset_contract.address} className="modal modal-fixed-footer">
               <div className="modal-content">
-                // TODO: rename to NewLeaseOfferModalContent
-                <NewLeaseOfferCard nft={this.props.nft}/>
+                {modalContent}
               </div>
               <div className="modal-footer">
                 <a href="#!" className="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -61,4 +68,4 @@ class SingleMyCard extends Component {
   }
 }
 
-export default SingleMyCard;
+export default SingleCard;

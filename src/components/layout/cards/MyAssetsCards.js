@@ -8,7 +8,7 @@ class MyAssetsCards extends Component {
   render() {
     const myNFTCards =  this.props.NFTAssets.length ? (
       this.props.NFTAssets.map(nft =>
-        <SingleCard nft={nft} />
+        <SingleCard nft={nft} type={this.props.type} />
       )
     ) : (
       <h5 className="center">No NFTs in your wallet</h5>
@@ -23,7 +23,7 @@ class MyAssetsCards extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // TODO: Pass account address as props to other componenets 
+    // TODO: Pass account address as props to other componenets
     userAddress: state.account.accountAddress,
     NFTAssets: state.account.accountAssets
   }

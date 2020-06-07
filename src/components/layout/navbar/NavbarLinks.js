@@ -27,7 +27,7 @@ class NavbarLinks extends Component {
         </ul>
 
         <ul id="nav-dropdown-lending" className="dropdown-content">
-          <li><NavLink to='/allorders' className='indigo-text text-darken-4'>New Loan Request</NavLink></li>
+          <li><NavLink to='/newloan' className='indigo-text text-darken-4'>New Loan Request</NavLink></li>
           <li className="divider"></li>
           <li><NavLink to="/allorders" className='indigo-text text-darken-4'>My Loan Requests</NavLink></li>
           <li className="divider"></li>
@@ -35,16 +35,6 @@ class NavbarLinks extends Component {
         </ul>
 
         <ul className="right">
-          {
-          /*
-          // TODO: remove
-          <li><NavLink to='/neworder'>Lend NFTs</NavLink></li>
-          <li><NavLink to='/neworder'>Request Loan</NavLink></li>
-          <li><NavLink to='/myorders'>My Offers</NavLink></li>
-          <li><NavLink to='/allorders'>Borrow NFTs</NavLink></li>
-          <li><NavLink to='/allorders'>All Loans</NavLink></li>
-          */
-          }
           <li>
             <a className="dropdown-trigger" data-target="nav-dropdown-leasing">
               Leasing
@@ -52,7 +42,7 @@ class NavbarLinks extends Component {
             </a>
           </li>
           <li>
-            <a className="dropdown-trigger" data-target="nav-dropdown-leasing">
+            <a className="dropdown-trigger" data-target="nav-dropdown-lending">
               Lending
               <i className="material-icons right">arrow_drop_down</i>
             </a>

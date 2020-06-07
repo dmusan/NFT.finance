@@ -78,14 +78,6 @@ export const lendNFT = (userAddress, smartContractAddressOfNFT, token_id,
   })
 }
 
-
-// export const approveReturn = (e) => {
-//   const erc721crt = new this._web3.eth.Contract(erc721ContractInterface, this.props.offer.smartContractAddressOfNFT, {from: this._account});
-//   erc721crt.methods.approve(CONTRACT_ADDRESS, this.props.offer.tokenIdNFT).send().on('confirmation', () => {
-//     console.log("approvedNFT")
-//   })
-// }
-
 export const cancelOffer = (lendingID, userAddress) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
@@ -102,16 +94,15 @@ export const endLendingOffer = (lendingID, userAddress) => {
   })
 }
 
-// TODO Add create offer
-
-// export const borrowNFT = (e) => {
-//   const crt = new this._web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: this._account});
-//   // add big number OPs
-//   const colAm = parseFloat(this._web3.utils.fromWei(this.props.offer.collateralAmount, 'ether'));
-//   const lenPr = parseFloat(this._web3.utils.fromWei(this.props.offer.lendingPrice, 'ether'));
-//   const sumString = (colAm + lenPr).toString();
-//   const amountToBorrowETH = this._web3.utils.toWei(sumString);
-//   crt.methods.acceptLendingOffer(this.props.offer.lendingID).send({value: amountToBorrowETH}).on('confirmation', () => {
-//     console.log("borred offer")
-//   })
-// }
+export const borrowNFT = (userAddress, lendingID, collateralAmount, lendingPrice) => {
+  const web3 = new Web3(window.ethereum);
+  const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
+  // add big number OPs
+  const colAm = parseFloat(web3.utils.fromWei(collateralAmount, 'ether'));
+  const lenPr = parseFloat(web3.utils.fromWei(lendingPrice, 'ether'));
+  const sumString = (colAm + lenPr).toString();
+  const amountToBorrowETH = web3.utils.toWei(sumString);
+  crt.methods.acceptLendingOffer(lendingID).send({value: amountToBorrowETH}).on('confirmation', () => {
+    console.log("borred offer")
+  })
+}

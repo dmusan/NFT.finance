@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import M from "materialize-css"
-import { cancelOffer } from '../../../../services/web3/leaseNFTContract'
+import { cancelOffer, approveNFT, endLendingOffer, borrowNFT } from '../../../../services/web3/leaseNFTContract'
 
 // TODO: move consts
 const OFFER_STATUS = ["Pending", "Active", "Cancelled", "Ended"];
@@ -13,50 +13,84 @@ class SingleLeaseOffer extends Component {
     M.Collapsible.init(elems, {});
   }
 
+  getOfferEndingTime = (endLendingTimeStamp) => {
+    console.log("timestamp: " + endLendingTimeStamp);
+    if (endLendingTimeStamp === "0") {
+      return "Ending time not set";
+    }
+    else return Intl.DateTimeFormat('en-GB').format(this.props.leaseOffer.endLendingTimeStamp * 1000);
+  }
+
   cancelOfferButton = (e) => {
     e.preventDefault();
     cancelOffer(this.props.leaseOffer.lendingID, this.props.userAddress);
   }
 
-  buttonAction = (e) => {
+  requestCollateral = (e) => {
     e.preventDefault();
+    endLendingOffer(this.props.leaseOffer.lendingID, this.props.userAddress);
   }
 
-  getAvailableActions() {
-    let actions = [];
+  approveReturn = (e) => {
+    e.preventDefault();
+    approveNFT(this.props.leaseOffer.smartContractAddressOfNFT,
+              this.props.userAddress,
+              this.props.leaseOffer.tokenIdNFT);
+  }
+
+  returnNFT = (e) => {
+    e.preventDefault();
+    endLendingOffer(this.props.leaseOffer.lendingID, this.props.userAddress);
+  }
+
+  acceptOffer = (e) => {
+    e.preventDefault();
+    borrowNFT(this.props.userAddress, this.props.leaseOffer.lendingID,
+            this.props.leaseOffer.collateralAmount, this.props.leaseOffer.lendingPrice);
+  }
+
+  getAvailableButtons = () => {
+    let buttons = [];
+
     if (this.props.leaseOffer.lender === this.props.userAddress) {
-      actions.push(
-        <div class="card-action">
-          <a href='/' onClick={this.cancelOfferButton}>Cancel</a>
-        </div>
-      );
-      if (this.props.leaseOffer.borrower != DEFAULT_BORROWER) {
-        actions.push(
+      if (OFFER_STATUS[this.props.leaseOffer.status] === "Pending") {
+        // if offer is pending lender can cancel it
+        buttons.push(
           <div class="card-action">
-            <a href='/' onClick={this.buttonAction}>Request Collateral</a>
+            <a href='/' onClick={this.cancelOfferButton}>Cancel</a>
           </div>
         );
+      } else if (OFFER_STATUS[this.props.leaseOffer.status] === "Active" &&
+                this.props.leaseOffer.endLendingTimeStamp <= Date.now()) {
+          buttons.push(
+            <div class="card-action">
+              <a href='/' onClick={this.requestCollateral}>Cancel</a>
+            </div>
+          )
       }
-    } else if (this.props.leaseOffer.borrower === this.props.userAddress) {
-      actions.push(
+    } else if (this.props.leaseOffer.borrower === this.props.userAddress &&
+              OFFER_STATUS[this.props.leaseOffer.status] === "Active") {
+      buttons.push(
         <div class="card-action">
-          <a href='/' onClick={this.buttonAction}>Approve Return</a>
-          <a href='/' onClick={this.buttonAction}>Return NFT</a>
+          <a href='/' onClick={this.approveReturn}>1. Approve Return</a>
+          <a href='/' onClick={this.returnNFT}>2. Return NFT</a>
         </div>
-      );
+      )
     } else {
-      actions.push(
-        <div class="card-action">
-          <a href='/' onClick={this.buttonAction}>Borrow</a>
-        </div>
-      );
+      if (OFFER_STATUS[this.props.leaseOffer.status] === "Pending" &&
+         this.props.leaseOffer.borrower !== this.props.userAddress) {
+        buttons.push(
+          <div class="card-action">
+            <a href='/' onClick={this.acceptOffer}>Accept Offer</a>
+          </div>
+        )
+      }
     }
-    return actions;
+    return buttons;
   }
 
-
   render() {
-    const actions = this.getAvailableActions();
+    const actions = this.getAvailableButtons();
     return(
       <ul class="collapsible">
         <li>
@@ -89,6 +123,9 @@ class SingleLeaseOffer extends Component {
                 </div>
                 <div className="row">
                   <p>Lending Period (hours): {this.props.leaseOffer.lendinPeriod / 3600}</p>
+                </div>
+                <div className="row">
+                  <p>End Lending Time: {this.getOfferEndingTime(this.props.leaseOffer.endLendingTimeStamp)}</p>
                 </div>
                 <div className="row">
                   <p>Lending Status: {OFFER_STATUS[this.props.leaseOffer.status]}</p>

@@ -7,7 +7,7 @@ import '../../../../css/mystyles.css'
 const NO_BORROWER = "0x0000000000000000000000000000000000000000";
 
 // ADD My Lease Offers "Page" to name
-class MyLeaseOffers extends Component {
+class AllLeaseOffersPage extends Component {
 
   state = {
     selectedOption: "0"
@@ -20,7 +20,7 @@ class MyLeaseOffers extends Component {
   render() {
     return (
       <div className="container">
-        <h5 className="grey-text text-darken-3 any-page-title-margin">My Lease Offers</h5>
+        <h5 className="grey-text text-darken-3 any-page-title-margin">All Lease Offers</h5>
         <div className="wrapper">
         <div className='row'>
           <div className='col s2 m2'>
@@ -59,10 +59,9 @@ class MyLeaseOffers extends Component {
               </p>
             </form>
           </div>
-          // TODO Add option choice of lessee or lessor
           <div className='col s10 m10'>
             <AllLeaseOffers
-              offersFilterLender={this.props.userAddress}
+              offersFilterLender=""
               offersFilterBorrower=""
               selectedOptionStatus={this.state.selectedOption} />
           </div>
@@ -79,4 +78,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(MyLeaseOffers);
+export default connect(mapStateToProps)(AllLeaseOffersPage);

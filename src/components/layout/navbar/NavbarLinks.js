@@ -29,9 +29,9 @@ class NavbarLinks extends Component {
         <ul id="nav-dropdown-lending" className="dropdown-content">
           <li><NavLink to='/newloan' className='indigo-text text-darken-4'>New Loan Request</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>My Loan Requests</NavLink></li>
+          <li><NavLink to="/myloans" className='indigo-text text-darken-4'>My Loan Requests</NavLink></li>
           <li className="divider"></li>
-          <li><NavLink to="/allorders" className='indigo-text text-darken-4'>All Loan Requests</NavLink></li>
+          <li><NavLink to="/allloans" className='indigo-text text-darken-4'>All Loan Requests</NavLink></li>
         </ul>
 
         <ul className="right">

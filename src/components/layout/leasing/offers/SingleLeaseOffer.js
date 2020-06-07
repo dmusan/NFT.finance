@@ -14,7 +14,6 @@ class SingleLeaseOffer extends Component {
   }
 
   getOfferEndingTime = (endLendingTimeStamp) => {
-    console.log("timestamp: " + endLendingTimeStamp);
     if (endLendingTimeStamp === "0") {
       return "Ending time not set";
     }
@@ -61,10 +60,10 @@ class SingleLeaseOffer extends Component {
           </div>
         );
       } else if (OFFER_STATUS[this.props.leaseOffer.status] === "Active" &&
-                this.props.leaseOffer.endLendingTimeStamp <= Date.now()) {
+                this.props.leaseOffer.endLendingTimeStamp * 1000 <= Date.now()) {
           buttons.push(
             <div class="card-action">
-              <a href='/' onClick={this.requestCollateral}>Cancel</a>
+              <a href='/' onClick={this.requestCollateral}>Request Collateral</a>
             </div>
           )
       }

@@ -21,6 +21,7 @@ export const getAssetsOpensea = (account) => {
 }
 
 export const getAllLeaseAssets = async (leaseOffers) => {
+  // TODO delete???
   const leaseAssets = leaseOffers.map( (offer) =>
     getAssetRequest(offer.smartContractAddressOfNFT, offer.tokenIdNFT)
   );
@@ -30,6 +31,19 @@ export const getAllLeaseAssets = async (leaseOffers) => {
     )
   )
   return leaseAssets;
+}
+
+// TODO make use prev function
+export const getAllLoanAssets = async (loanRequests) => {
+  const loanAssets = loanRequests.map( (request) =>
+    getAssetRequest(request.smartContractAddressOfNFT, request.tokenIdNFT)
+  );
+  return Promise.all(
+    loanRequests.map(
+      (request) => getAssetRequest(request.smartContractAddressOfNFT, request.tokenIdNFT)
+    )
+  )
+  return loanAssets;
 }
 
 export const getAssetRequest = async (contractAddress, tokenIdNFT) => {

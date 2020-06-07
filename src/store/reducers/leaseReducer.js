@@ -4,6 +4,7 @@ const initState = {
 }
 
 const leaseReducer = (state = initState, action) => {
+  // TODO change to switch
   if (action.type === 'ADD_LEASE_OFFERS') {
     let newLeaseOffers = action.leaseOffers;
     return {

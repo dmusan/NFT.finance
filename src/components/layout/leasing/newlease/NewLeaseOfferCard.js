@@ -4,8 +4,9 @@ import { Button, Blockie } from "rimble-ui";
 import { EthAddress } from "rimble-ui";
 
 import '../../../../css/mystyles.css'
-import { approveNFT } from '../../../../services/web3/leaseNFTContract'
+import { approveNFT, lendNFT } from '../../../../services/web3/leaseNFTContract'
 
+// TODO: Rename to NewLeaseOfferModalContent
 class NewLeaseOfferCard extends Component {
 
   // State will get be filled with changes to input components
@@ -25,6 +26,18 @@ class NewLeaseOfferCard extends Component {
       this.props.nft.asset_contract.address,
       this.props.userAddress,
       this.props.nft.token_id
+    );
+  }
+
+  lendNFTButton = (e) => {
+    e.preventDefault();
+    lendNFT(
+      this.props.userAddress,
+      this.props.nft.asset_contract.address,
+      this.props.nft.token_id,
+      this.state.leasePeriod,
+      this.state.collateralAmount,
+      this.state.leasePrice
     );
   }
 
@@ -73,7 +86,7 @@ class NewLeaseOfferCard extends Component {
               <button className="btn indigo lighten-1 button-offer" onClick={ this.approveNFT }>1. Approve Transfer</button>
           </div>
           <div className="row">
-              <button className="btn indigo lighten-1 button-offer" onClick={ this.approveNFT }>2. Create Offer</button>
+              <button className="btn indigo lighten-1 button-offer" onClick={ this.lendNFTButton }>2. Create Offer</button>
           </div>
         </div>
       </div>

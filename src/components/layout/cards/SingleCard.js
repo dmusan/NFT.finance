@@ -48,6 +48,7 @@ class SingleMyCard extends Component {
           <div className="center-align">
             <div id={"modal" + this.props.nft.token_id + this.props.nft.asset_contract.address} className="modal modal-fixed-footer">
               <div className="modal-content">
+                // TODO: rename to NewLeaseOfferModalContent
                 <NewLeaseOfferCard nft={this.props.nft}/>
               </div>
               <div className="modal-footer">

@@ -21,7 +21,7 @@ export const getAssetsOpensea = (account) => {
 }
 
 export const getAllLeaseAssets = async (leaseOffers) => {
-  const leaseAssets =  leaseOffers.map( (offer) =>
+  const leaseAssets = leaseOffers.map( (offer) =>
     getAssetRequest(offer.smartContractAddressOfNFT, offer.tokenIdNFT)
   );
   return Promise.all(

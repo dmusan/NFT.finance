@@ -23,6 +23,7 @@ class MyAssetsCards extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    // TODO: Pass account address as props to other componenets 
     userAddress: state.account.accountAddress,
     NFTAssets: state.account.accountAssets
   }

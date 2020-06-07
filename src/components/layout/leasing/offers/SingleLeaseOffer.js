@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import M from "materialize-css"
+import { cancelOffer } from '../../../../services/web3/leaseNFTContract'
 
 // TODO: move consts
 const OFFER_STATUS = ["Pending", "Active", "Cancelled", "Ended"];
@@ -12,6 +13,11 @@ class SingleLeaseOffer extends Component {
     M.Collapsible.init(elems, {});
   }
 
+  cancelOfferButton = (e) => {
+    e.preventDefault();
+    cancelOffer(this.props.leaseOffer.lendingID, this.props.userAddress);
+  }
+
   buttonAction = (e) => {
     e.preventDefault();
   }
@@ -21,7 +27,7 @@ class SingleLeaseOffer extends Component {
     if (this.props.leaseOffer.lender === this.props.userAddress) {
       actions.push(
         <div class="card-action">
-          <a href='/' onClick={this.buttonAction}>Cancel</a>
+          <a href='/' onClick={this.cancelOfferButton}>Cancel</a>
         </div>
       );
       if (this.props.leaseOffer.borrower != DEFAULT_BORROWER) {

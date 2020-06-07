@@ -45,7 +45,6 @@ class App extends Component {
           <Route path='/myleaseoffers' component={MyLeaseOffers} />
           <Route path='/' component={HomePage} />
         </Switch>
-        <GetCardsFromWallet />
       </BrowserRouter>
     );
   }
@@ -63,7 +62,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAccountAddressAction: () => dispatch(getAccountAddressAction()),
     getAccountAssetAction: (address) => dispatch(getAccountAssetAction(address)),
-    //TODO remove ?
     getLeaseOffersAction: (address) => dispatch(getLeaseOffersAction(address)),
     getLeaseAssetsAction: (leaseOffers) => dispatch(getLeaseAssetsAction(leaseOffers))
   }

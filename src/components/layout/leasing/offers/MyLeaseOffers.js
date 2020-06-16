@@ -59,7 +59,7 @@ class MyLeaseOffers extends Component {
               </p>
             </form>
           </div>
-          // TODO Add option choice of lessee or lessor
+          { /* TODO Add option choice of lessee or lessor */ }
           <div className='col s10 m10'>
             <AllLeaseOffers
               offersFilterLender={this.props.userAddress}

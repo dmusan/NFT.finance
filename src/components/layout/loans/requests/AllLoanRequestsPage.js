@@ -67,7 +67,7 @@ class AllLoanRequestsPage extends Component {
           <div className='col s10 m10'>
           <AllLoanRequests
             requestsFilterLender=""
-            requestsFilterBorrower={this.props.userAddress}
+            requestsFilterBorrower=""
             selectedOptionStatus={this.state.selectedOption} />
           </div>
         </div>

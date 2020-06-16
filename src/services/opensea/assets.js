@@ -48,7 +48,10 @@ export const getAllLoanAssets = async (loanRequests) => {
 
 export const getAssetRequest = async (contractAddress, tokenIdNFT) => {
   try {
-    const response = axios.get("https://rinkeby-api.opensea.io/api/v1/asset/" + contractAddress + "/" + tokenIdNFT);
+    const response = await axios.get("https://rinkeby-api.opensea.io/api/v1/asset/" + contractAddress + "/" + tokenIdNFT, {
+      headers: {
+        'X-API-KEY': '4e9ca01b6f0c403d9c5110b9c89b177a'
+      }});
     return response;
   } catch (error) {
     console.error(error);

@@ -29,9 +29,14 @@ class AllLoanRequests extends Component {
   }
 
   getNFTAsset = (loanRequest) => {
-    const assets = this.props.allLoanAssets.filter(requestAsset =>
-      requestAsset.token_id === loanRequest.tokenIdNFT
-          && requestAsset.asset_contract.address === loanRequest.smartContractAddressOfNFT
+    const assets = this.props.allLoanAssets.filter(requestAsset => {
+        try {
+          return requestAsset.token_id === loanRequest.tokenIdNFT
+            && requestAsset.asset_contract.address === loanRequest.smartContractAddressOfNFT
+        } catch(error) {
+          console.log("request asset is: " + JSON.stringify(requestAsset));
+        }
+      }
     );
     if (assets.length > 0) {
       return assets[0];

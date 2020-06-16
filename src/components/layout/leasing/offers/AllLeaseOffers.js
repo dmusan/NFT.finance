@@ -30,10 +30,15 @@ class AllLeaseOffers extends Component {
   }
 
   getNFTAsset = (offer) => {
-    const assets = this.props.allLeaseAssets.filter(offerAsset =>
-      offerAsset.token_id === offer.tokenIdNFT
+    const assets = this.props.allLeaseAssets.filter((offerAsset) => {
+      try {
+        return offerAsset.token_id === offer.tokenIdNFT
           && offerAsset.asset_contract.address === offer.smartContractAddressOfNFT
-    );
+        } catch(error) {
+          console.log("offer asset is: " + JSON.stringify(offerAsset));
+        }
+      }
+    )
     if (assets.length > 0) {
       return assets[0];
     }

@@ -37,6 +37,13 @@ export const approveNFT = (erc721ContractAddress, userAddress, tokenIdNFT) => {
     erc721ContractAddress,
     {from: userAddress}
   );
+
+// TODO remove
+  erc721crt.methods.approve(CONTRACT_ADDRESS, tokenIdNFT).estimateGas((error, gasAmount) => {
+    console.log("gas estimate for approve: " + gasAmount);
+  });
+//
+
   erc721crt.methods.approve(CONTRACT_ADDRESS, tokenIdNFT).send().on('transactionHash', (hash) => {
     window.toastProvider.addMessage("Transaction started...", {
       // TODO make functions for this
@@ -66,6 +73,18 @@ export const lendNFT = (userAddress, smartContractAddressOfNFT, token_id,
 
   const ethCollateralAmount = web3.utils.toWei(collateralAmount);
   const ethLendingPrice = web3.utils.toWei(lendingPrice);
+
+  // TODO remove
+  crt.methods.createLendingOffer(smartContractAddressOfNFT,
+      token_id,
+      ethCollateralAmount,
+      ethLendingPrice,
+      lendinPeriod * 86400
+    ).estimateGas((error, gasAmount) => {
+    console.log("gas estimate for createLendingOffer: " + JSON.stringify(gasAmount));
+  });
+  //
+
   crt.methods.createLendingOffer(
     smartContractAddressOfNFT,
     token_id,
@@ -81,6 +100,14 @@ export const lendNFT = (userAddress, smartContractAddressOfNFT, token_id,
 export const cancelOffer = (lendingID, userAddress) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
+
+  // TODO remove
+  crt.methods.cancelLendingOffer(lendingID).estimateGas((error, gasAmount) => {
+    console.log("gas estimate for cancelLendingOffer: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
   crt.methods.cancelLendingOffer(lendingID).send().on('confirmation', () => {
     console.log("cancelled offer")
   })
@@ -89,20 +116,37 @@ export const cancelOffer = (lendingID, userAddress) => {
 export const endLendingOffer = (lendingID, userAddress) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
+
+  // TODO remove
+  crt.methods.endLendingOffer(lendingID).estimateGas((error, gasAmount) => {
+    console.log("gas estimate for endLendingOffer: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
   crt.methods.endLendingOffer(lendingID).send().on('confirmation', () => {
-    console.log("cancelled offer")
+    console.log("end offer")
   })
 }
 
 export const borrowNFT = (userAddress, lendingID, collateralAmount, lendingPrice) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
+
   // add big number OPs
   const colAm = parseFloat(web3.utils.fromWei(collateralAmount, 'ether'));
   const lenPr = parseFloat(web3.utils.fromWei(lendingPrice, 'ether'));
   const sumString = (colAm + lenPr).toString();
   const amountToBorrowETH = web3.utils.toWei(sumString);
+
+  // TODO remove
+  crt.methods.acceptLendingOffer(lendingID).estimateGas({value : amountToBorrowETH}, (error, gasAmount) => {
+    console.log("error for acceptLendingOffer: " + JSON.stringify(error));
+    console.log("gas estimate for acceptLendingOffer: " + JSON.stringify(gasAmount));
+  });
+  //
+
   crt.methods.acceptLendingOffer(lendingID).send({value: amountToBorrowETH}).on('confirmation', () => {
-    console.log("borred offer")
+    console.log("borrow offer")
   })
 }

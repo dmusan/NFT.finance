@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import M from "materialize-css"
-// import { cancelOffer, approveNFT, endLendingOffer, borrowNFT } from '../../../../services/web3/leaseNFTContract'
+import { cancelLoanRequest, endLoanRequest, acceptLoanRequest, extendLoanRequest } from '../../../../services/web3/loansNFTContract'
 
 // TODO: move consts
 const REQUEST_STATUS = ["Pending", "Active", "Cancelled", "Ended", "Defaulted"];
@@ -22,30 +22,51 @@ class SingleLoanRequest extends Component {
 
   cancelRequestButton = (e) => {
     e.preventDefault();
-    // cancelOffer(this.props.leaseOffer.lendingID, this.props.userAddress);
+    console.log("user address: " + this.props.userAddress);
+    console.log("loan id: " + this.props.loanRequest.loanID);
+    cancelLoanRequest(this.props.userAddress, this.props.loanRequest.loanID);
   }
 
   requestNFTCollateral = (e) => {
     e.preventDefault();
-    // endLendingOffer(this.props.leaseOffer.lendingID, this.props.userAddress);
+    console.log("user address: " + this.props.userAddress);
+    console.log("loan id: " + this.props.loanRequest.loanID);
+    endLoanRequest(this.props.userAddress, this.props.loanRequest.loanID);
   }
 
   endLoanRequest = (e) => {
     e.preventDefault();
-    // approveNFT(this.props.leaseOffer.smartContractAddressOfNFT,
-    //           this.props.userAddress,
-    //           this.props.leaseOffer.tokenIdNFT);
+    console.log("user address: " + this.props.userAddress);
+    console.log("loan id: " + this.props.loanRequest.loanID);
+    endLoanRequest(this.props.userAddress,
+                   this.props.loanRequest.loanID,
+                   this.props.loanRequest.loanAmount);
   }
 
   acceptLoanRequest = (e) => {
     e.preventDefault();
-    // borrowNFT(this.props.userAddress, this.props.leaseOffer.lendingID,
-    //         this.props.leaseOffer.collateralAmount, this.props.leaseOffer.lendingPrice);
+    console.log("user address: " + this.props.userAddress);
+    console.log("loan id: " + this.props.loanRequest.loanID);
+    console.log("loan amount: " + this.props.loanRequest.loanAmount);
+    console.log("interest amount: " + this.props.loanRequest.interestAmount);
+    acceptLoanRequest(
+      this.props.userAddress,
+      this.props.loanRequest.loanID,
+      this.props.loanRequest.loanAmount,
+      this.props.loanRequest.interestAmount
+    );
   }
 
   extendLoanRequest = (e) => {
     e.preventDefault();
-
+    console.log("user address: " + this.props.userAddress);
+    console.log("loan id: " + this.props.loanRequest.loanID);
+    console.log("interest amount: " + this.props.loanRequest.interestAmount);
+    extendLoanRequest(
+      this.props.userAddress,
+      this.props.loanRequest.loanID,
+      this.props.loanRequest.interestAmount
+    )
   }
 
   getAvailableButtons = () => {
@@ -73,21 +94,20 @@ class SingleLoanRequest extends Component {
           </div>
         )
       }
-    } else if (this.props.loanRequest.lender === this.props.userAddress) {
-      if (REQUEST_STATUS[this.props.loanRequest.status] === "Pending") {
-        buttons.push(
-          <div class="card-action">
-            <a href='/' onClick={this.acceptLoanRequest}>Accept Loan</a>
-          </div>
-        )
-      } else if (REQUEST_STATUS[this.props.loanRequest.status] === "Active" &&
-                this.props.loanRequest.endLoanTimeStamp * 1000 <= Date.now()) {
-        buttons.push(
-          <div class="card-action">
-            <a href='/' onClick={this.endLoanRequest}>Request NFT Collateral</a>
-          </div>
-        )
-      }
+    } else if (this.props.loanRequest.lender === this.props.userAddress &&
+               REQUEST_STATUS[this.props.loanRequest.status] === "Active" &&
+               this.props.loanRequest.endLoanTimeStamp * 1000 <= Date.now()) {
+      buttons.push(
+        <div class="card-action">
+          <a href='/' onClick={this.endLoanRequest}>Request NFT Collateral</a>
+        </div>
+      )
+    } else if (REQUEST_STATUS[this.props.loanRequest.status] === "Pending") {
+      buttons.push(
+        <div class="card-action">
+          <a href='/' onClick={this.acceptLoanRequest}>Accept Loan</a>
+        </div>
+      )
     }
     return buttons;
   }

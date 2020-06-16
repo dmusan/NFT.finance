@@ -34,6 +34,22 @@ export const createLoanRequest = (userAddress, smartContractAddressOfNFT, tokenI
 
   const ethLoanAmount = web3.utils.toWei(loanAmount);
   const ethInterestAmount = web3.utils.toWei(interestAmount);
+
+  // TODO remove
+  crt.methods.createLoanRequest(
+    smartContractAddressOfNFT,
+    tokenIdNFT,
+    ethLoanAmount,
+    ethInterestAmount,
+    singlePeriodTime * 86400,
+    maximumInterestPeriods
+  ).estimateGas((error, gasAmount) => {
+    console.log("gas estimate for createLoanRequest: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
+
   crt.methods.createLoanRequest(
     smartContractAddressOfNFT,
     tokenIdNFT,
@@ -50,15 +66,31 @@ export const createLoanRequest = (userAddress, smartContractAddressOfNFT, tokenI
 export const cancelLoanRequest = (userAddress, loanID) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
+
+  // TODO remove
+  crt.methods.cancelLoanRequest(loanID).estimateGas((error, gasAmount) => {
+    console.log("gas estimate for cancelLoanRequest: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
   crt.methods.cancelLoanRequest(loanID).send().on('confirmation', () => {
     console.log("cancelled loan")
   })
 }
 
-export const endLoanRequest = (userAddress, loanID) => {
+export const endLoanRequest = (userAddress, loanID, loanAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
-  crt.methods.endLoanRequest(loanID).send().on('confirmation', () => {
+
+  // TODO remove
+  crt.methods.endLoanRequest(loanID).estimateGas({value: loanAmount}, (error, gasAmount) => {
+    console.log("gas estimate for endLoanRequest: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
+  crt.methods.endLoanRequest(loanID).send({value: loanAmount}).on('confirmation', () => {
     console.log("cancelled loan")
   })
 }
@@ -66,6 +98,14 @@ export const endLoanRequest = (userAddress, loanID) => {
 export const extendLoanRequest = (userAddress, loanID, interestAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, CONTRACT_ADDRESS, {from: userAddress});
+
+  // TODO remove
+  crt.methods.extendLoanRequest(loanID).estimateGas({value: interestAmount}, (error, gasAmount) => {
+    console.log("gas estimate for extendLoanRequest: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
   crt.methods.extendLoanRequest(loanID).send({value: interestAmount}).on('confirmation', () => {
     console.log("cancelled loan")
   })
@@ -81,6 +121,14 @@ export const acceptLoanRequest = (userAddress, loanID, loanAmount, interestAmoun
   const ethInterestAmount = parseFloat(web3.utils.fromWei(interestAmount, 'ether'));
   const sumString = (ethLoanAmount - ethInterestAmount).toString();
   const loanTotal = web3.utils.toWei(sumString);
+
+  // TODO remove
+  crt.methods.acceptLoanRequest(loanID).estimateGas({value: loanTotal}, (error, gasAmount) => {
+    console.log("gas estimate for acceptLoanRequest: " + JSON.stringify(gasAmount));
+  });
+  //
+
+
   crt.methods.acceptLoanRequest(loanID).send({value: loanTotal}).on('confirmation', () => {
     console.log("loan active")
   })

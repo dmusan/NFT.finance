@@ -106,10 +106,10 @@ class SingleLeaseOffer extends Component {
                 </div>
                 <br/>
                 <div className="row">
-                  <p>Lender: {this.props.leaseOffer.lender}</p>
+                  <p>Lessor: {this.props.leaseOffer.lender}</p>
                 </div>
                 <div className="row">
-                  <p>Borrower: {this.props.leaseOffer.borrower}</p>
+                  <p>Lessee: {this.props.leaseOffer.borrower}</p>
                 </div>
                 <div className="row">
                   <p>Collateral Amount: {this.props.leaseOffer.collateralAmount / Math.pow(10, 18)}</p>

@@ -77,11 +77,11 @@ contract LoansNFT is IERC721Receiver, Pausable {
         require(singlePeriodTime < 31 days, "A single period can have a maximum of one month.");
         require(interestAmount < loanAmount, "Interest must be lower than the principal of the loan.");
         require(maximumInterestPeriods < 12, "Maximum interest periods are 12.");
+        require(maximumInterestPeriods > 0, "Maximum interest period cannot be 0.");
 
         IERC721 currentNFT = IERC721(smartContractAddressOfNFT);
         require(currentNFT.getApproved(tokenIdNFT) == address(this), "Transfer has to be approved first");
 
-        totalLoanRequests = SafeMath.add(totalLoanRequests, 1);
         LoanRequest storage loanRequest =  allLoanRequests[totalLoanRequests];
         loanRequest.loanID = totalLoanRequests;
         loanRequest.lender = address(0x0);
@@ -93,6 +93,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
         loanRequest.singlePeriodTime = singlePeriodTime;
         loanRequest.maximumInterestPeriods = maximumInterestPeriods;
         loanRequest.status = Status.PENDING;
+        totalLoanRequests = SafeMath.add(totalLoanRequests, 1);
 
         currentNFT.safeTransferFrom(msg.sender, address(this), tokenIdNFT);
         emit LoansUpdated();
@@ -104,10 +105,10 @@ contract LoansNFT is IERC721Receiver, Pausable {
 
         // The lender is require to underwrite the total loan amount minus the interest
         // For the first period of the loan
-        uint sumForLoan = allLoanRequests[loanID].loanAmount.sub(allLoanRequests[loanID].interestAmount);
+        uint sumForLoan = allLoanRequests[loanID].loanAmount - allLoanRequests[loanID].interestAmount;
         require(msg.value >= sumForLoan, "Not enough Ether sent to function to underwrite loan.");
 
-        allLoanRequests[loanID].maximumInterestPeriods.sub(1);
+        allLoanRequests[loanID].maximumInterestPeriods = allLoanRequests[loanID].maximumInterestPeriods - 1;
 
         allLoanRequests[loanID].lender = msg.sender;
         allLoanRequests[loanID].status = Status.ACTIVE;
@@ -126,7 +127,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
         require(msg.value >= allLoanRequests[loanID].interestAmount, "Not enough Ether sent to the function to extend loan.");
 
 
-        allLoanRequests[loanID].maximumInterestPeriods.sub(1);
+        allLoanRequests[loanID].maximumInterestPeriods = allLoanRequests[loanID].maximumInterestPeriods - 1;
         allLoanRequests[loanID].endLoanTimeStamp = SafeMath.add(allLoanRequests[loanID].endLoanTimeStamp, allLoanRequests[loanID].singlePeriodTime);
 
         allLoanRequests[loanID].lender.transfer(allLoanRequests[loanID].interestAmount);
@@ -151,6 +152,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
 
         // NFT is sent to the function caller (the lender or borrower).
         IERC721 currentNFT = IERC721(allLoanRequests[loanID].smartContractAddressOfNFT);
+        currentNFT.approve(msg.sender, allLoanRequests[loanID].tokenIdNFT);
         currentNFT.transferFrom(address(this), msg.sender, allLoanRequests[loanID].tokenIdNFT);
         emit LoansUpdated();
     }
@@ -162,6 +164,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
         allLoanRequests[loanID].status = Status.CANCELLED;
 
         IERC721 currentNFT = IERC721(allLoanRequests[loanID].smartContractAddressOfNFT);
+        currentNFT.approve(msg.sender, allLoanRequests[loanID].tokenIdNFT);
         currentNFT.transferFrom(address(this), msg.sender, allLoanRequests[loanID].tokenIdNFT);
         emit LoansUpdated();
     }

@@ -82,7 +82,7 @@ contract ForwardContractNFT is IERC721Receiver, Pausable {
         forwardContract.contractPrice = contractPrice;
         forwardContract.contractPeriod = contractPeriod;
         forwardContract.status = Status.PENDING;
-        totalContracts.add(1);
+        SafeMath.add(totalContracts, 1);
 
         currentNFT.safeTransferFrom(msg.sender, address(this), tokenIdNFT);
     }
@@ -94,7 +94,7 @@ contract ForwardContractNFT is IERC721Receiver, Pausable {
 
         allContracts[contractID].buyer = msg.sender;
         allContracts[contractID].status = Status.ACTIVE;
-        allContracts[contractID].endContractTimeStamp = now.add(allContracts[contractID].contractPeriod);
+        allContracts[contractID].endContractTimeStamp = SafeMath.add(now, allContracts[contractID].contractPeriod);
 
         allContracts[contractID].seller.transfer(allContracts[contractID].contractPrice);
     }

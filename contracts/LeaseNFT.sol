@@ -9,6 +9,8 @@ import {SafeMath} from "https://github.com/OpenZeppelin/openzeppelin-contracts/b
 
 contract LeaseNFT is IERC721Receiver, Pausable {
 
+    event LeasesUpdated();
+
     using SafeMath for uint;
 
     enum Status { PENDING, ACTIVE, CANCELLED, ENDED }
@@ -48,7 +50,7 @@ contract LeaseNFT is IERC721Receiver, Pausable {
 
     constructor() public {
         manager = msg.sender;
-        totalLeaseOffers = 1;
+        totalLeaseOffers = 0;
     }
 
 
@@ -87,22 +89,23 @@ contract LeaseNFT is IERC721Receiver, Pausable {
         leaseOffer.leasePrice = leasePrice;
         leaseOffer.leasePeriod = leasePeriod;
         leaseOffer.status = Status.PENDING;
-        totalLeaseOffers.add(1);
+        totalLeaseOffers = SafeMath.add(totalLeaseOffers, 1);
 
         currentNFT.safeTransferFrom(msg.sender, address(this), tokenIdNFT);
+        emit LeasesUpdated();
     }
 
     function acceptLeaseOffer(uint leaseID) payable public isValidLeaseID(leaseID) whenNotPaused {
         require(allLeaseOffers[leaseID].status == Status.PENDING, "Status is not PENDING for lease.");
         require(allLeaseOffers[leaseID].lessor != msg.sender, "Invalid operation. You cannot lease your own asset.");
 
-        uint sumReqiuredToLease = allLeaseOffers[leaseID].collateralAmount.add(allLeaseOffers[leaseID].leasePrice);
+        uint sumReqiuredToLease = SafeMath.add(allLeaseOffers[leaseID].collateralAmount, allLeaseOffers[leaseID].leasePrice);
 
         require(msg.value >= sumReqiuredToLease, "Not enough Ether sent to function to start lease.");
 
         allLeaseOffers[leaseID].lessee = msg.sender;
         allLeaseOffers[leaseID].status = Status.ACTIVE;
-        allLeaseOffers[leaseID].endLeaseTimeStamp = now.add(allLeaseOffers[leaseID].leasePeriod);
+        allLeaseOffers[leaseID].endLeaseTimeStamp = SafeMath.add(now, allLeaseOffers[leaseID].leasePeriod);
 
         // Send lease price to lessor
         allLeaseOffers[leaseID].lessor.transfer(allLeaseOffers[leaseID].leasePrice);
@@ -110,6 +113,7 @@ contract LeaseNFT is IERC721Receiver, Pausable {
         // Send NFT to lessee
         IERC721 currentNFT = IERC721(allLeaseOffers[leaseID].smartContractAddressOfNFT);
         currentNFT.transferFrom(address(this), msg.sender, allLeaseOffers[leaseID].tokenIdNFT);
+        emit LeasesUpdated();
     }
 
     function endLeaseOffer(uint leaseID) public isValidLeaseID(leaseID) {
@@ -131,6 +135,7 @@ contract LeaseNFT is IERC721Receiver, Pausable {
 
         // The caller of the function will receive the collateral
         msg.sender.transfer(allLeaseOffers[leaseID].collateralAmount);
+        emit LeasesUpdated();
     }
 
     function cancelLeaseOffer(uint leaseID) public isValidLeaseID(leaseID) {
@@ -142,5 +147,6 @@ contract LeaseNFT is IERC721Receiver, Pausable {
         IERC721 currentNFT = IERC721(allLeaseOffers[leaseID].smartContractAddressOfNFT);
         currentNFT.safeTransferFrom(address(this), allLeaseOffers[leaseID].lessor,
                                     allLeaseOffers[leaseID].tokenIdNFT);
+        emit LeasesUpdated();
     }
 }

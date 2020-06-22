@@ -1,8 +1,8 @@
 import Web3 from 'web3'
-import { ToastMessage } from "rimble-ui";
 import contractInterface from '../../contractsInterfaces/LoansNFT.json'
 import erc721ContractInterface from '../../contractsInterfaces/erc721.json'
 import { LENDING_CONTRACT_ADDRESS } from "../../assets/consts/requestsConsts"
+import { processingToast, successToast, failedToast } from './toasts.js'
 
 export const getAllLoanRequests = async (address) => {
   if (window.ethereum) {
@@ -26,7 +26,12 @@ export const approveNFT = async (erc721ContractAddress, userAddress, tokenIdNFT)
     {from: userAddress}
   );
   erc721crt.methods.approve(LENDING_CONTRACT_ADDRESS, tokenIdNFT).send().on('transactionHash', (hash) => {
-  }).on('receipt', (receipt) => {}).on('error', (error) => {});
+    processingToast(hash);
+  }).on('receipt', (receipt) => {
+    successToast("NFT has been approved!");
+  }).on('error', (error) => {
+    failedToast();
+  });
 }
 
 export const createLoanRequest = async (userAddress, smartContractAddressOfNFT, tokenIdNFT,
@@ -44,36 +49,52 @@ export const createLoanRequest = async (userAddress, smartContractAddressOfNFT, 
     ethInterestAmount,
     singlePeriodTime * 86400,
     maximumInterestPeriods
-  ).send().on('confirmation', () => {
-    console.log("added to blockchain")
-  })
+  ).send().on('transactionHash', (hash) => {
+    processingToast(hash);
+  }).on('receipt', (receipt) => {
+    successToast("Request has been created!");
+  }).on('error', (error) => {
+    failedToast();
+  });
 }
 
 export const cancelLoanRequest = async (userAddress, loanID) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
 
-  crt.methods.cancelLoanRequest(loanID).send().on('confirmation', () => {
-    console.log("cancelled loan")
-  })
+  crt.methods.cancelLoanRequest(loanID).send().on('transactionHash', (hash) => {
+    processingToast(hash);
+  }).on('receipt', (receipt) => {
+    successToast("Request has been cancelled!");
+  }).on('error', (error) => {
+    failedToast();
+  });
 }
 
 export const endLoanRequest = async (userAddress, loanID, loanAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
 
-  crt.methods.endLoanRequest(loanID).send({value: loanAmount}).on('confirmation', () => {
-    console.log("cancelled loan")
-  })
+  crt.methods.endLoanRequest(loanID).send({value: loanAmount}).on('transactionHash', (hash) => {
+    processingToast(hash);
+  }).on('receipt', (receipt) => {
+    successToast("Request has ended!");
+  }).on('error', (error) => {
+    failedToast();
+  });
 }
 
 export const extendLoanRequest = async (userAddress, loanID, interestAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
 
-  crt.methods.extendLoanRequest(loanID).send({value: interestAmount}).on('confirmation', () => {
-    console.log("cancelled loan")
-  })
+  crt.methods.extendLoanRequest(loanID).send({value: interestAmount}).on('transactionHash', (hash) => {
+    processingToast(hash);
+  }).on('receipt', (receipt) => {
+    successToast("Request has been extended!");
+  }).on('error', (error) => {
+    failedToast();
+  });
 }
 
 
@@ -85,7 +106,11 @@ export const acceptLoanRequest = async (userAddress, loanID, loanAmount, interes
   const sumString = (ethLoanAmount - ethInterestAmount).toString();
   const loanTotal = web3.utils.toWei(sumString);
 
-  crt.methods.acceptLoanRequest(loanID).send({value: loanTotal}).on('confirmation', () => {
-    console.log("loan active")
-  })
+  crt.methods.acceptLoanRequest(loanID).send({value: loanTotal}).on('transactionHash', (hash) => {
+    processingToast(hash);
+  }).on('receipt', (receipt) => {
+    successToast("Request has been accepted!");
+  }).on('error', (error) => {
+    failedToast();
+  });
 }

@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import M from "materialize-css"
 import SingleLeaseOffer from './SingleLeaseOffer'
-
-// TODO: move consts
-const LOADING_ASSET = {"image_url": "loadingImage", "name": "loadingAsset", "permalink": "https://opensea.io/assets", "description": "Loading Asset"};
+import { LOADING_ASSET } from "../../../../assets/consts/assetsConsts"
 
 class AllLeaseOffers extends Component {
 
@@ -12,7 +9,6 @@ class AllLeaseOffers extends Component {
      if (this.props.offersFilterBorrower === "") {
       return true;
     }
-    // TODO change when updating smart contract
     return leaseOffer.borrower === this.props.offersFilterBorrower;
   }
 
@@ -20,12 +16,10 @@ class AllLeaseOffers extends Component {
     if (this.props.offersFilterLender === "") {
       return true;
     }
-    // TODO change when updating smart contract
     return leaseOffer.lender === this.props.offersFilterLender;
   }
 
   filterSelectedOptionStatus = (leaseOffer) => {
-    // TODO change when updating smart contract. Maybe this doesn't have to be updated?
     return leaseOffer.status === this.props.selectedOptionStatus;
   }
 
@@ -46,10 +40,9 @@ class AllLeaseOffers extends Component {
   }
 
   render() {
-    const filteredLeaseOffers =
-                  this.props.allLeaseOffers.filter(this.filterLender)
-                                           .filter(this.filterBorrower)
-                                           .filter(this.filterSelectedOptionStatus);
+    const filteredLeaseOffers = this.props.allLeaseOffers.filter(this.filterLender)
+                                                         .filter(this.filterBorrower)
+                                                         .filter(this.filterSelectedOptionStatus);
 
     const filteredLeaseOffersComponents = filteredLeaseOffers.length ? (
       filteredLeaseOffers.map( (leaseOffer) =>

@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AllLeaseOffers from './AllLeaseOffers'
-import '../../../../css/mystyles.css'
 
-// TODO move consts and styles
-const NO_BORROWER = "0x0000000000000000000000000000000000000000";
 
-// ADD My Lease Offers "Page" to name
 class MyLeaseOffers extends Component {
 
   state = {
@@ -59,7 +55,6 @@ class MyLeaseOffers extends Component {
               </p>
             </form>
           </div>
-          { /* TODO Add option choice of lessee or lessor */ }
           <div className='col s10 m10'>
             <AllLeaseOffers
               offersFilterLender={this.props.userAddress}

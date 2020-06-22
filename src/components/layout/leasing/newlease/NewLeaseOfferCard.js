@@ -57,21 +57,21 @@ class NewLeaseOfferCard extends Component {
           <form>
             <div>
               <b className="input-margins">Collateral Amount</b>
-              <div class="input-field">
+              <div className="input-field">
                 <input id="collateral_amount" type="text" name="collateralAmount" onChange={this.handleChange} />
                 <label htmlFor="collateral_amount">Amount in ETH</label>
               </div>
             </div>
             <div>
               <b className="input-margins">Price to lease</b>
-              <div class="input-field">
+              <div className="input-field">
                 <input id="lease_price" type="text" name="leasePrice" onChange={this.handleChange} />
                 <label htmlFor="lease_price">Amount in ETH</label>
               </div>
             </div>
             <div>
               <b className="input-margins">Lease Period</b>
-              <div class="input-field">
+              <div className="input-field">
                 <input id="lease_period" type="text" name="leasePeriod" onChange={this.handleChange} />
                 <label htmlFor="lease_period">Max days for lease</label>
               </div>

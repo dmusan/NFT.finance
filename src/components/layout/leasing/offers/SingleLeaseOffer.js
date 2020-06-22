@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import M from "materialize-css"
 import { cancelOffer, approveNFT, endLendingOffer, borrowNFT } from '../../../../services/web3/leaseNFTContract'
-
-// TODO: move consts
-const OFFER_STATUS = ["Pending", "Active", "Cancelled", "Ended"];
-const DEFAULT_BORROWER = "0x0000000000000000000000000000000000000000";
+import { OFFER_STATUS } from "../../../../assets/consts/offersConsts"
 
 class SingleLeaseOffer extends Component {
 
@@ -105,7 +102,7 @@ class SingleLeaseOffer extends Component {
                   {this.props.nftAsset.description}
                 </div>
                 <div className="row">
-                  More info on <a href={this.props.nftAsset.permalink}>OpenSea</a>
+                  <a className="btn waves-effect waves-light indigo lighten-1 button-offer" href={this.props.nftAsset.permalink}>OpenSea</a>
                 </div>
                 <br/>
                 <div className="row">

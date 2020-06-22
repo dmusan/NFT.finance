@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AllLeaseOffers from './AllLeaseOffers'
-import '../../../../css/mystyles.css'
 
-// TODO move consts and styles
-const NO_BORROWER = "0x0000000000000000000000000000000000000000";
 
-// ADD My Lease Offers "Page" to name
 class AllLeaseOffersPage extends Component {
 
   state = {

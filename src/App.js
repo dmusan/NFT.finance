@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import './App.css'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { ToastMessage } from "rimble-ui"
+
 import { getAccountAddressAction, getAccountAssetAction } from './store/actions/accountActions'
 import { getLeaseOffersAction, getLeaseAssetsAction } from './store/actions/leaseActions'
 import { getLoanRequestsAction, getLoanAssetsAction } from './store/actions/loanActions'
-import { ToastMessage } from "rimble-ui"
 
 import './assets/css/mystyles.css'
 import Navbar from './components/layout/navbar/Navbar'
@@ -17,6 +18,9 @@ import NewLoanRequestPage from './components/layout/loans/newloan/NewLoanRequest
 import MyLoanRequestsPage from './components/layout/loans/requests/MyLoanRequestsPage'
 import AllLoanRequestsPage from './components/layout/loans/requests/AllLoanRequestsPage'
 
+import { LENDING_CONTRACT_ADDRESS } from "./assets/consts/requestsConsts"
+import contractInterface from './contractsInterfaces/LoansNFT.json'
+import Web3 from 'web3'
 
 class App extends Component {
 
@@ -29,12 +33,24 @@ class App extends Component {
       this.props.getAccountAssetAction(this.props.userAddress);
       this.props.getLeaseOffersAction(this.props.userAddress);
       this.props.getLoanRequestsAction(this.props.userAddress);
+      this.subscribeToEvents();
     }
     if (prevProps.leaseOffers.length !== this.props.leaseOffers.length) {
       this.props.getLeaseAssetsAction(this.props.leaseOffers);
     }
     if (prevProps.loanRequests.length !== this.props.loanRequests.length) {
       this.props.getLoanAssetsAction(this.props.loanRequests);
+    }
+  }
+
+  subscribeToEvents = () => {
+    if (window.ethereum) {
+      const web3 = new Web3(window.ethereum);
+      const crtLending = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: this.props.userAddress});
+      crtLending.events.allEvents().on('data', (event) => {
+        this.props.getAccountAssetAction(this.props.userAddress);
+        this.props.getLoanRequestsAction(this.props.userAddress);
+      });
     }
   }
 

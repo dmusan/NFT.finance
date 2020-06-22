@@ -1,5 +1,42 @@
 [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [],
+		"name": "LoansUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Paused",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Unpaused",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -10,6 +47,75 @@
 		"name": "acceptLoanRequest",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "allLoanRequests",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "loanID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address payable",
+				"name": "lender",
+				"type": "address"
+			},
+			{
+				"internalType": "address payable",
+				"name": "borrower",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "smartContractAddressOfNFT",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenIdNFT",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "loanAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "interestAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "singlePeriodTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "maximumInterestPeriods",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "endLoanTimeStamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum LoansNFT.Status",
+				"name": "status",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -90,6 +196,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "manager",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -125,129 +244,9 @@
 	},
 	{
 		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "Paused",
-		"type": "event"
-	},
-	{
-		"inputs": [],
 		"name": "pauseLoans",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "Unpaused",
-		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "unPauseLoans",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "allLoanRequests",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "loanID",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address payable",
-				"name": "lender",
-				"type": "address"
-			},
-			{
-				"internalType": "address payable",
-				"name": "borrower",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "smartContractAddressOfNFT",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenIdNFT",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "loanAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "interestAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "singlePeriodTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "maximumInterestPeriods",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "endLoanTimeStamp",
-				"type": "uint256"
-			},
-			{
-				"internalType": "enum LoansNFT.Status",
-				"name": "status",
-				"type": "uint8"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "manager",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -274,6 +273,13 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "unPauseLoans",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

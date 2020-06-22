@@ -6,6 +6,7 @@ import { processingToast, successToast, failedToast } from './toasts.js'
 
 export const getWeb3Account = async () => {
   if (window.ethereum) {
+    console.log('version: ' + window.ethereum.networkVersion);
     if (window.ethereum.networkVersion !== '4') {
       alert("Please switch to Rinkeby test network to use this app!");
     }

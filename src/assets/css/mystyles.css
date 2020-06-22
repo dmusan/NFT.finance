@@ -57,6 +57,10 @@
   width: 10vw;
 }
 
+sub {
+  font-size: small;
+}
+
 img {
   padding: 1vw;
   width: auto;

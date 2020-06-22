@@ -1,11 +1,13 @@
 import axios from 'axios';
+import { OPENSEA_ASSETS, OPENSEA_SINGLE_ASSET, API_KEY } from "../../assets/consts/assetsConsts"
 
 export const getAssetsOpensea = (account) => {
   try {
-    const response = axios.get('https://rinkeby-api.opensea.io/api/v1/assets/', {
+    const response = axios.get(OPENSEA_ASSETS, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'X-API-KEY': API_KEY
       },
       params: {
         order_direction: 'desc',
@@ -21,7 +23,6 @@ export const getAssetsOpensea = (account) => {
 }
 
 export const getAllLeaseAssets = async (leaseOffers) => {
-  // TODO delete???
   const leaseAssets = leaseOffers.map( (offer) =>
     getAssetRequest(offer.smartContractAddressOfNFT, offer.tokenIdNFT)
   );
@@ -33,7 +34,6 @@ export const getAllLeaseAssets = async (leaseOffers) => {
   return leaseAssets;
 }
 
-// TODO make use prev function
 export const getAllLoanAssets = async (loanRequests) => {
   const loanAssets = loanRequests.map( (request) =>
     getAssetRequest(request.smartContractAddressOfNFT, request.tokenIdNFT)
@@ -48,9 +48,9 @@ export const getAllLoanAssets = async (loanRequests) => {
 
 export const getAssetRequest = async (contractAddress, tokenIdNFT) => {
   try {
-    const response = await axios.get("https://rinkeby-api.opensea.io/api/v1/asset/" + contractAddress + "/" + tokenIdNFT, {
+    const response = await axios.get(OPENSEA_SINGLE_ASSET + contractAddress + "/" + tokenIdNFT, {
       headers: {
-        'X-API-KEY': '4e9ca01b6f0c403d9c5110b9c89b177a'
+        'X-API-KEY': API_KEY
       }});
     return response;
   } catch (error) {

@@ -7,11 +7,10 @@ class NavbarLinks extends Component {
   componentDidMount() {
     let elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, {
-      // TODO change comments?
-      constrainWidth: false, // Does not change width of dropdown to that of the activator
-      hover: true, // Activate on hover
-      gutter: 0, // Spacing from edge
-      coverTrigger: false, // Displays dropdown below the button
+      constrainWidth: false, 
+      hover: true,
+      gutter: 0,
+      coverTrigger: false,
     });
   }
 

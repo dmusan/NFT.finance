@@ -14,7 +14,14 @@ export const ethEnabled = async () => {
 }
 
 export const getWeb3Account = async () => {
-  return window.ethereum.enable().then( accounts => accounts[0].toLowerCase() );
+  if (window.ethereum) {
+    if (window.ethereum.networkVersion !== '4') {
+      alert("Please switch to Rinkeby test network to use this app!");
+    }
+    return window.ethereum.enable().then( accounts => accounts[0].toLowerCase() );
+  }
+  alert("Install an Ethereum-compatible browser or extension running on Rinkeby test network to use this app!");
+  return 0;
 }
 
 export const getAllLeaseOffers = async (address) => {

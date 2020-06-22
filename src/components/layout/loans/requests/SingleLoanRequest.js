@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import M from "materialize-css"
 import { cancelLoanRequest, endLoanRequest, acceptLoanRequest, extendLoanRequest } from '../../../../services/web3/loansNFTContract'
+import { REQUEST_STATUS } from '../../../../assets/consts/requestsConsts'
 
-// TODO: move consts
-const REQUEST_STATUS = ["Pending", "Active", "Cancelled", "Ended", "Defaulted"];
 
 class SingleLoanRequest extends Component {
 
@@ -16,28 +15,21 @@ class SingleLoanRequest extends Component {
     if (endLoanTimeStamp === "0") {
       return "Ending time not set";
     }
-    // TODO add const
     else return Intl.DateTimeFormat('en-GB').format(this.props.loanRequest.endLoanTimeStamp * 1000);
   }
 
   cancelRequestButton = (e) => {
     e.preventDefault();
-    console.log("user address: " + this.props.userAddress);
-    console.log("loan id: " + this.props.loanRequest.loanID);
     cancelLoanRequest(this.props.userAddress, this.props.loanRequest.loanID);
   }
 
   requestNFTCollateral = (e) => {
     e.preventDefault();
-    console.log("user address: " + this.props.userAddress);
-    console.log("loan id: " + this.props.loanRequest.loanID);
     endLoanRequest(this.props.userAddress, this.props.loanRequest.loanID);
   }
 
   endLoanRequest = (e) => {
     e.preventDefault();
-    console.log("user address: " + this.props.userAddress);
-    console.log("loan id: " + this.props.loanRequest.loanID);
     endLoanRequest(this.props.userAddress,
                    this.props.loanRequest.loanID,
                    this.props.loanRequest.loanAmount);
@@ -45,10 +37,6 @@ class SingleLoanRequest extends Component {
 
   acceptLoanRequest = (e) => {
     e.preventDefault();
-    console.log("user address: " + this.props.userAddress);
-    console.log("loan id: " + this.props.loanRequest.loanID);
-    console.log("loan amount: " + this.props.loanRequest.loanAmount);
-    console.log("interest amount: " + this.props.loanRequest.interestAmount);
     acceptLoanRequest(
       this.props.userAddress,
       this.props.loanRequest.loanID,
@@ -59,9 +47,6 @@ class SingleLoanRequest extends Component {
 
   extendLoanRequest = (e) => {
     e.preventDefault();
-    console.log("user address: " + this.props.userAddress);
-    console.log("loan id: " + this.props.loanRequest.loanID);
-    console.log("interest amount: " + this.props.loanRequest.interestAmount);
     extendLoanRequest(
       this.props.userAddress,
       this.props.loanRequest.loanID,
@@ -74,7 +59,7 @@ class SingleLoanRequest extends Component {
 
     if (this.props.loanRequest.borrower === this.props.userAddress) {
       if (REQUEST_STATUS[this.props.loanRequest.status] === "Pending") {
-        // if offer is pending lender can cancel it
+        // if request is pending lender can cancel it
         buttons.push(
           <div class="card-action">
             <a href='/' onClick={this.cancelRequestButton}>Cancel</a>
@@ -129,7 +114,7 @@ class SingleLoanRequest extends Component {
                   {this.props.nftAsset.description}
                 </div>
                 <div className="row">
-                  More info on <a href={this.props.nftAsset.permalink}>OpenSea</a>
+                  <a className="btn waves-effect waves-light indigo lighten-1 button-offer" href={this.props.nftAsset.permalink}>OpenSea</a>
                 </div>
                 <br/>
                 <div className="row">

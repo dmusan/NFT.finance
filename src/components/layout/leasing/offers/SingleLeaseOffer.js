@@ -115,16 +115,16 @@ class SingleLeaseOffer extends Component {
                   <p>Collateral Amount: {this.props.leaseOffer.collateralAmount / Math.pow(10, 18)}</p>
                 </div>
                 <div className="row">
-                  <p>Lending Price: {this.props.leaseOffer.lendingPrice / Math.pow(10, 18)}</p>
+                  <p>Leasing Price: {this.props.leaseOffer.lendingPrice / Math.pow(10, 18)}</p>
                 </div>
                 <div className="row">
-                  <p>Lending Period (hours): {this.props.leaseOffer.lendinPeriod / 3600}</p>
+                  <p>Leasing Period (days): {this.props.leaseOffer.lendinPeriod / 86400}</p>
                 </div>
                 <div className="row">
-                  <p>End Lending Time: {this.getOfferEndingTime(this.props.leaseOffer.endLendingTimeStamp)}</p>
+                  <p>End Leasing Time: {this.getOfferEndingTime(this.props.leaseOffer.endLendingTimeStamp)}</p>
                 </div>
                 <div className="row">
-                  <p>Lending Status: {OFFER_STATUS[this.props.leaseOffer.status]}</p>
+                  <p>Leasing Status: {OFFER_STATUS[this.props.leaseOffer.status]}</p>
                 </div>
                 {actions}
               </div>

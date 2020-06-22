@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AllLoanRequests from './AllLoanRequests'
-import '../../../../css/mystyles.css'
 
-// ADD My Lease Offers "Page" to name
+
 class AllLoanRequestsPage extends Component {
 
   state = {

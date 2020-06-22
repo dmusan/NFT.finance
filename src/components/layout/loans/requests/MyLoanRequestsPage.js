@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AllLoanRequests from './AllLoanRequests'
-import '../../../../css/mystyles.css'
 
 class MyLoanRequestsPage extends Component {
 

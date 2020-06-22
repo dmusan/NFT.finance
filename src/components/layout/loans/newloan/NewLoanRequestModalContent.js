@@ -89,7 +89,7 @@ class NewLoanRequestModalContent extends Component {
                 <button className="btn indigo lighten-1 button-offer right" onClick={ this.approveNFT }>1. Approve Transfer</button>
             </div>
             <div className="row">
-                <button className="btn indigo lighten-1 button-offer right" onClick={ this.newLoanRequest }>2. Create Offer</button>
+                <button className="btn indigo lighten-1 button-offer right" onClick={ this.newLoanRequest }>2. Create Request</button>
             </div>
           </div>
         </div>

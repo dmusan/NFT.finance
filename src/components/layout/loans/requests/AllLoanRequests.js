@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import M from "materialize-css"
 import SingleLoanRequest from './SingleLoanRequest'
+import { LOADING_ASSET } from "../../../../assets/consts/assetsConsts"
 
-// TODO: move consts
-const LOADING_ASSET = {"image_url": "loadingImage", "name": "loadingAsset", "permalink": "https://opensea.io/assets", "description": "Loading Asset"};
 
 class AllLoanRequests extends Component {
 
@@ -12,7 +10,6 @@ class AllLoanRequests extends Component {
      if (this.props.requestsFilterBorrower === "") {
       return true;
     }
-    // TODO change when updating smart contract
     return loanRequest.borrower === this.props.requestsFilterBorrower;
   }
 
@@ -20,7 +17,6 @@ class AllLoanRequests extends Component {
     if (this.props.requestsFilterLender === "") {
       return true;
     }
-    // TODO change when updating smart contract
     return loanRequest.lender === this.props.requestsFilterBorrower;
   }
 
@@ -34,7 +30,7 @@ class AllLoanRequests extends Component {
           return requestAsset.token_id === loanRequest.tokenIdNFT
             && requestAsset.asset_contract.address === loanRequest.smartContractAddressOfNFT
         } catch(error) {
-          console.log("request asset is: " + JSON.stringify(requestAsset));
+          console.log(error);
         }
       }
     );

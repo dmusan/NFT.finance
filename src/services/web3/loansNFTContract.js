@@ -5,14 +5,17 @@ import erc721ContractInterface from '../../contractsInterfaces/erc721.json'
 import { LENDING_CONTRACT_ADDRESS } from "../../assets/consts/requestsConsts"
 
 export const getAllLoanRequests = async (address) => {
-  const web3 = new Web3(window.ethereum);
-  const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, { from: address });
-  const loanRequestsNumber = parseInt(await crt.methods.totalLoanRequests().call())
-  return Promise.all(
-    [...Array(loanRequestsNumber + 1).keys()].map(
-      id => crt.methods.allLoanRequests(id).call()
+  if (window.ethereum) {
+    const web3 = new Web3(window.ethereum);
+    const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, { from: address });
+    const loanRequestsNumber = parseInt(await crt.methods.totalLoanRequests().call())
+    return Promise.all(
+      [...Array(loanRequestsNumber + 1).keys()].map(
+        id => crt.methods.allLoanRequests(id).call()
+      )
     )
-  )
+  }
+  return [];
 }
 
 export const approveNFT = async (erc721ContractAddress, userAddress, tokenIdNFT) => {

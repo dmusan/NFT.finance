@@ -4,15 +4,6 @@ import contractInterface from '../../contractsInterfaces/LendNFT.json'
 import erc721ContractInterface from '../../contractsInterfaces/erc721.json'
 import { LEASING_CONTRACT_ADDRESS } from "../../assets/consts/offersConsts"
 
-export const ethEnabled = async () => {
-  if (window.ethereum) {
-    window.web3 = new Web3(window.ethereum);
-    window.ethereum.enable();
-    return true;
-  }
-  return false;
-}
-
 export const getWeb3Account = async () => {
   if (window.ethereum) {
     if (window.ethereum.networkVersion !== '4') {
@@ -25,14 +16,17 @@ export const getWeb3Account = async () => {
 }
 
 export const getAllLeaseOffers = async (address) => {
-  const web3 = new Web3(window.ethereum);
-  const crt = new web3.eth.Contract(contractInterface, LEASING_CONTRACT_ADDRESS, { from: address });
-  const leaseOffersNumber = parseInt(await crt.methods.totalLendingOffers().call())
-  return Promise.all(
-    [...Array(leaseOffersNumber + 1).keys()].map(
-      id => crt.methods.allLendingOffers(id).call()
+  if (window.ethereum) {
+    const web3 = new Web3(window.ethereum);
+    const crt = new web3.eth.Contract(contractInterface, LEASING_CONTRACT_ADDRESS, { from: address });
+    const leaseOffersNumber = parseInt(await crt.methods.totalLendingOffers().call())
+    return Promise.all(
+      [...Array(leaseOffersNumber + 1).keys()].map(
+        id => crt.methods.allLendingOffers(id).call()
+      )
     )
-  )
+  }
+  return [];
 }
 
 export const approveNFT = async (erc721ContractAddress, userAddress, tokenIdNFT) => {

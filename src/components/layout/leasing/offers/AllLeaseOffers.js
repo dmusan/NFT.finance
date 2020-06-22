@@ -29,7 +29,7 @@ class AllLeaseOffers extends Component {
         return offerAsset.token_id === offer.tokenIdNFT
           && offerAsset.asset_contract.address === offer.smartContractAddressOfNFT
         } catch(error) {
-          console.log("offer asset is: " + JSON.stringify(offerAsset));
+          console.log(error);
         }
       }
     )

@@ -7,7 +7,7 @@ import { getLeaseOffersAction, getLeaseAssetsAction } from './store/actions/leas
 import { getLoanRequestsAction, getLoanAssetsAction } from './store/actions/loanActions'
 import { ToastMessage } from "rimble-ui"
 
-import './css/mystyles.css'
+import './assets/css/mystyles.css'
 import Navbar from './components/layout/navbar/Navbar'
 import HomePage from './components/layout/home/HomePage'
 import NewLeaseOffersPage from './components/layout/leasing/newlease/NewLeaseOfferPage'
@@ -27,7 +27,6 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.userAddress !== this.props.userAddress) {
       this.props.getAccountAssetAction(this.props.userAddress);
-      // TODO: need address below?
       this.props.getLeaseOffersAction(this.props.userAddress);
       this.props.getLoanRequestsAction(this.props.userAddress);
     }

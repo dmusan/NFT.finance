@@ -9,6 +9,8 @@ import {SafeMath} from "https://github.com/OpenZeppelin/openzeppelin-contracts/b
 
 contract LoansNFT is IERC721Receiver, Pausable {
 
+    event LoansUpdated();
+
     using SafeMath for uint;
 
     enum Status { PENDING, ACTIVE, CANCELLED, ENDED, DEFAULTED }
@@ -49,7 +51,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
 
     constructor() public {
         manager = msg.sender;
-        totalLoanRequests = 1;
+        totalLoanRequests = 0;
     }
 
     // Equivalent to 'bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))'
@@ -79,6 +81,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
         IERC721 currentNFT = IERC721(smartContractAddressOfNFT);
         require(currentNFT.getApproved(tokenIdNFT) == address(this), "Transfer has to be approved first");
 
+        totalLoanRequests = SafeMath.add(totalLoanRequests, 1);
         LoanRequest storage loanRequest =  allLoanRequests[totalLoanRequests];
         loanRequest.loanID = totalLoanRequests;
         loanRequest.lender = address(0x0);
@@ -90,9 +93,9 @@ contract LoansNFT is IERC721Receiver, Pausable {
         loanRequest.singlePeriodTime = singlePeriodTime;
         loanRequest.maximumInterestPeriods = maximumInterestPeriods;
         loanRequest.status = Status.PENDING;
-        totalLoanRequests.add(1);
 
         currentNFT.safeTransferFrom(msg.sender, address(this), tokenIdNFT);
+        emit LoansUpdated();
     }
 
     function acceptLoanRequest(uint loanID) payable public isValidLoanID(loanID) whenNotPaused {
@@ -108,11 +111,12 @@ contract LoansNFT is IERC721Receiver, Pausable {
 
         allLoanRequests[loanID].lender = msg.sender;
         allLoanRequests[loanID].status = Status.ACTIVE;
-        allLoanRequests[loanID].endLoanTimeStamp = now.add(allLoanRequests[loanID].singlePeriodTime);
+        allLoanRequests[loanID].endLoanTimeStamp = SafeMath.add(now, allLoanRequests[loanID].singlePeriodTime);
 
         // Send sumForLoan to borrower
         // NFT is kept by the loans smart contract
         allLoanRequests[loanID].borrower.transfer(sumForLoan);
+        emit LoansUpdated();
     }
 
     function extendLoanRequest(uint loanID) payable public isValidLoanID(loanID) whenNotPaused {
@@ -123,9 +127,10 @@ contract LoansNFT is IERC721Receiver, Pausable {
 
 
         allLoanRequests[loanID].maximumInterestPeriods.sub(1);
-        allLoanRequests[loanID].endLoanTimeStamp = allLoanRequests[loanID].endLoanTimeStamp.add(allLoanRequests[loanID].singlePeriodTime);
+        allLoanRequests[loanID].endLoanTimeStamp = SafeMath.add(allLoanRequests[loanID].endLoanTimeStamp, allLoanRequests[loanID].singlePeriodTime);
 
         allLoanRequests[loanID].lender.transfer(allLoanRequests[loanID].interestAmount);
+        emit LoansUpdated();
     }
 
     function endLoanRequest(uint loanID) payable public isValidLoanID(loanID) {
@@ -147,6 +152,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
         // NFT is sent to the function caller (the lender or borrower).
         IERC721 currentNFT = IERC721(allLoanRequests[loanID].smartContractAddressOfNFT);
         currentNFT.transferFrom(address(this), msg.sender, allLoanRequests[loanID].tokenIdNFT);
+        emit LoansUpdated();
     }
 
     function cancelLoanRequest(uint loanID) public isValidLoanID(loanID) {
@@ -156,6 +162,7 @@ contract LoansNFT is IERC721Receiver, Pausable {
         allLoanRequests[loanID].status = Status.CANCELLED;
 
         IERC721 currentNFT = IERC721(allLoanRequests[loanID].smartContractAddressOfNFT);
-        currentNFT.safeTransferFrom(address(this), msg.sender, allLoanRequests[loanID].tokenIdNFT);
+        currentNFT.transferFrom(address(this), msg.sender, allLoanRequests[loanID].tokenIdNFT);
+        emit LoansUpdated();
     }
 }

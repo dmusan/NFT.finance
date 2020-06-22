@@ -27,7 +27,7 @@ class SingleCard extends Component {
               <div className="card-title activator grey-text text-darken-3 center-align">{this.props.nft.name}</div>
             </div>
             <div className="card-action">
-              <a className="btn modal-trigger indigo lighten-1"
+              <a className="btn waves-effect waves-light modal-trigger indigo lighten-1"
                 href={"#modal" + this.props.nft.token_id + this.props.nft.asset_contract.address}>Use this NFT</a>
             </div>
             <div className="card-reveal">
@@ -47,7 +47,7 @@ class SingleCard extends Component {
                 <p className="grey-text text-darken-3"><b>Description:</b> {this.props.nft.description}</p>
                 <p className="grey-text text-darken-3"><b>Create by:</b> {this.props.nft.asset_contract.name}</p>
                 <p className="grey-text text-darken-3"><b>Number of sales:</b> {this.props.nft.sell_orders.length}</p>
-                <p className="grey-text text-darken-3">Find out more about this asset on <b><a className="btn indigo lighten-1 button-offer" target="_blank" href={this.props.nft.permalink}>OpenSea</a></b></p>
+                <p className="grey-text text-darken-3">Find out more about this asset on <b><a className="btn waves-effect waves-light indigo lighten-1 button-offer" target="_blank" href={this.props.nft.permalink}>OpenSea</a></b></p>
               </div>
             </div>
           </div>

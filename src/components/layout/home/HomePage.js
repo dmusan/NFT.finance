@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import HomeCard from './HomeCard'
-import '../../../css/mystyles.css'
 
 class HomePage extends Component {
 

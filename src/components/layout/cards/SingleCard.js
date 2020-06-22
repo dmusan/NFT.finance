@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import '../../../css/mystyles.css'
 import NewLeaseOfferCard from '../leasing/newlease/NewLeaseOfferCard'
 import NewLoanRequestModalContent from '../loans/newloan/NewLoanRequestModalContent'
 import M from "materialize-css";
@@ -13,7 +12,6 @@ class SingleCard extends Component {
 
   render() {
     const modalContent = this.props.type === "lease" ? (
-      // TODO: rename to NewLeaseOfferModalContent
       <NewLeaseOfferCard nft={this.props.nft} />
     ) : (
       <NewLoanRequestModalContent nft={this.props.nft} />
@@ -49,7 +47,7 @@ class SingleCard extends Component {
                 <p className="grey-text text-darken-3"><b>Description:</b> {this.props.nft.description}</p>
                 <p className="grey-text text-darken-3"><b>Create by:</b> {this.props.nft.asset_contract.name}</p>
                 <p className="grey-text text-darken-3"><b>Number of sales:</b> {this.props.nft.sell_orders.length}</p>
-                <p className="grey-text text-darken-3">Find out more about this asset on <b><a target="_blank" href={this.props.nft.permalink}>OpenSea</a></b></p>
+                <p className="grey-text text-darken-3">Find out more about this asset on <b><a className="btn indigo lighten-1 button-offer" target="_blank" href={this.props.nft.permalink}>OpenSea</a></b></p>
               </div>
             </div>
           </div>

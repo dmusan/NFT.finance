@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import { getAccountAddressAction, getAccountAssetAction } from './store/actions/accountActions'
 import { getLeaseOffersAction, getLeaseAssetsAction } from './store/actions/leaseActions'
 import { getLoanRequestsAction, getLoanAssetsAction } from './store/actions/loanActions'
-import { ToastMessage } from "rimble-ui";
+import { ToastMessage } from "rimble-ui"
 
+import './css/mystyles.css'
 import Navbar from './components/layout/navbar/Navbar'
 import HomePage from './components/layout/home/HomePage'
 import NewLeaseOffersPage from './components/layout/leasing/newlease/NewLeaseOfferPage'

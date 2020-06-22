@@ -19,10 +19,10 @@ const HomeCard = () => {
             <NavLink to='/' className="amber-text text-lighten-2">Docs</NavLink>
           </div>
           <div className="card-action">
-            <NavLink to='/' className="amber-text text-lighten-2">Create Lease Offer</NavLink>
+            <NavLink to='/newlease' className="amber-text text-lighten-2">Create Lease Offer</NavLink>
           </div>
           <div className="card-action">
-            <NavLink to='/' className="amber-text text-lighten-2">Create Loan Request</NavLink>
+            <NavLink to='/newloan' className="amber-text text-lighten-2">Create Loan Request</NavLink>
           </div>
         </div>
       </div>

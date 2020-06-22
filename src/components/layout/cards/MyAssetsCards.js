@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import '../../../css/mystyles.css'
 import SingleCard from "./SingleCard"
 import { connect } from 'react-redux'
 
@@ -23,7 +22,6 @@ class MyAssetsCards extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // TODO: Pass account address as props to other componenets
     userAddress: state.account.accountAddress,
     NFTAssets: state.account.accountAssets
   }

@@ -7,7 +7,7 @@ class NavbarLinks extends Component {
   componentDidMount() {
     let elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems, {
-      constrainWidth: false, 
+      constrainWidth: false,
       hover: true,
       gutter: 0,
       coverTrigger: false,
@@ -46,7 +46,6 @@ class NavbarLinks extends Component {
               <i className="material-icons right">arrow_drop_down</i>
             </a>
           </li>
-          <li><NavLink to='/'>Chat</NavLink></li>
           <li><NavLink to='/' className='amber-text text-lighten-1'>Docs</NavLink></li>
         </ul>
       </div>

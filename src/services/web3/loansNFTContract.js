@@ -10,7 +10,7 @@ export const getAllLoanRequests = async (address) => {
     const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, { from: address });
     const loanRequestsNumber = parseInt(await crt.methods.totalLoanRequests().call())
     return Promise.all(
-      [...Array(loanRequestsNumber + 1).keys()].map(
+      [...Array(loanRequestsNumber).keys()].map(
         id => crt.methods.allLoanRequests(id).call()
       )
     )

@@ -15,7 +15,7 @@ export const getAllLoanRequests = async (address) => {
   )
 }
 
-export const approveNFT = (erc721ContractAddress, userAddress, tokenIdNFT) => {
+export const approveNFT = async (erc721ContractAddress, userAddress, tokenIdNFT) => {
   const web3 = new Web3(window.ethereum);
   const erc721crt = new web3.eth.Contract(
     erc721ContractInterface,
@@ -26,7 +26,7 @@ export const approveNFT = (erc721ContractAddress, userAddress, tokenIdNFT) => {
   }).on('receipt', (receipt) => {}).on('error', (error) => {});
 }
 
-export const createLoanRequest = (userAddress, smartContractAddressOfNFT, tokenIdNFT,
+export const createLoanRequest = async (userAddress, smartContractAddressOfNFT, tokenIdNFT,
                         loanAmount, interestAmount, singlePeriodTime, maximumInterestPeriods) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
@@ -46,7 +46,7 @@ export const createLoanRequest = (userAddress, smartContractAddressOfNFT, tokenI
   })
 }
 
-export const cancelLoanRequest = (userAddress, loanID) => {
+export const cancelLoanRequest = async (userAddress, loanID) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
 
@@ -55,7 +55,7 @@ export const cancelLoanRequest = (userAddress, loanID) => {
   })
 }
 
-export const endLoanRequest = (userAddress, loanID, loanAmount) => {
+export const endLoanRequest = async (userAddress, loanID, loanAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
 
@@ -64,7 +64,7 @@ export const endLoanRequest = (userAddress, loanID, loanAmount) => {
   })
 }
 
-export const extendLoanRequest = (userAddress, loanID, interestAmount) => {
+export const extendLoanRequest = async (userAddress, loanID, interestAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
 
@@ -74,7 +74,7 @@ export const extendLoanRequest = (userAddress, loanID, interestAmount) => {
 }
 
 
-export const acceptLoanRequest = (userAddress, loanID, loanAmount, interestAmount) => {
+export const acceptLoanRequest = async (userAddress, loanID, loanAmount, interestAmount) => {
   const web3 = new Web3(window.ethereum);
   const crt = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: userAddress});
   const ethLoanAmount = parseFloat(web3.utils.fromWei(loanAmount, 'ether'));

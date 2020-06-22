@@ -4,13 +4,9 @@ import { getAllLoanAssets } from '../../services/opensea/assets'
 export const getLoanRequestsAction = () => {
   return (dispatch, getState) => {
     getAllLoanRequests().then( loanRequests => {
-        // Change all addresses to lowercase
         const updatedRequests = loanRequests.map( (loanRequest) => {
-          // TODO change to lessor ?
             loanRequest.lender = loanRequest.lender.toLowerCase();
-            // TODO change to lessee
             loanRequest.borrower = loanRequest.borrower.toLowerCase();
-            // TODO leave as is
             loanRequest.smartContractAddressOfNFT = loanRequest.smartContractAddressOfNFT.toLowerCase();
             return loanRequest;
           }

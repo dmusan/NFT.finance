@@ -1,0 +1,67 @@
+.vertical-wrapper {
+  min-height: 90vh;
+}
+
+.card-width {
+  width:80%;
+}
+
+.margin-container {
+  margin-top: 3%;
+}
+
+.wrapper {
+  height: auto !important;
+}
+
+.my-card {
+  margin-left: 0.5vw;
+  margin-top: 0.8vw;
+}
+
+.card-image-mycard {
+  height: 35vh;
+  overflow: hidden;
+}
+
+.card-content-mycard {
+  height: 9vh;
+  overflow: hidden;
+}
+
+.page-title-margin {
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+  margin-left: 0.9vw;
+}
+
+.page-subtitle-margin {
+  margin-left: 0.9vw;
+}
+
+.any-page-title-margin {
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+}
+
+.card-asset-content {
+  margin-bottom: 7vh;
+}
+
+.input-margins {
+  margin-right: 1vw;
+}
+
+.button-offer {
+  margin-top: 0.5vw;
+  width: 10vw;
+}
+
+img {
+  padding: 1vw;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height:100%;
+  object-fit: contain;
+}

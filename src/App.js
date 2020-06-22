@@ -19,6 +19,7 @@ import MyLoanRequestsPage from './components/layout/loans/requests/MyLoanRequest
 import AllLoanRequestsPage from './components/layout/loans/requests/AllLoanRequestsPage'
 
 import { LENDING_CONTRACT_ADDRESS } from "./assets/consts/requestsConsts"
+import { LEASING_CONTRACT_ADDRESS } from './assets/consts/offersConsts'
 import contractInterface from './contractsInterfaces/LoansNFT.json'
 import Web3 from 'web3'
 
@@ -47,9 +48,14 @@ class App extends Component {
     if (window.ethereum) {
       const web3 = new Web3(window.ethereum);
       const crtLending = new web3.eth.Contract(contractInterface, LENDING_CONTRACT_ADDRESS, {from: this.props.userAddress});
+      const crtLeasing = new web3.eth.Contract(contractInterface, LEASING_CONTRACT_ADDRESS, {from: this.props.userAddress});
       crtLending.events.allEvents().on('data', (event) => {
         this.props.getAccountAssetAction(this.props.userAddress);
         this.props.getLoanRequestsAction(this.props.userAddress);
+      });
+      crtLeasing.events.allEvents().on('data', (event) => {
+        this.props.getAccountAssetAction(this.props.userAddress);
+        this.props.getLeaseOffersAction(this.props.userAddress);
       });
     }
   }

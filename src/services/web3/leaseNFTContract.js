@@ -6,10 +6,13 @@ import { processingToast, successToast, failedToast } from './toasts.js'
 
 export const getWeb3Account = async () => {
   if (window.ethereum) {
-    console.log('version: ' + window.ethereum.networkVersion);
-    if (window.ethereum.networkVersion !== RINKEBY_NETWORK_VERSION) {
-      alert("Please switch to Rinkeby test network to use this app!");
-    }
+    const web3 = new Web3(window.ethereum);
+    web3.eth.net.getId().then( id => {
+        if (id !== RINKEBY_NETWORK_VERSION) {
+          alert("Please switch to Rinkeby test network to use this app!");
+        }
+      }
+    )
     return window.ethereum.enable().then( accounts => accounts[0].toLowerCase() );
   }
   alert("Install an Ethereum-compatible browser or extension running on Rinkeby test network to use this app!");

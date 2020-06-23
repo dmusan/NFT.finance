@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import M from "materialize-css"
 import { cancelLoanRequest, endLoanRequest, acceptLoanRequest, extendLoanRequest } from '../../../../services/web3/loansNFTContract'
 import { REQUEST_STATUS } from '../../../../assets/consts/requestsConsts'
+import { EthAddress } from "rimble-ui";
 
 
 class SingleLoanRequest extends Component {
@@ -117,29 +118,31 @@ class SingleLoanRequest extends Component {
                   <a className="btn waves-effect waves-light indigo lighten-1 button-offer" href={this.props.nftAsset.permalink}>OpenSea</a>
                 </div>
                 <br/>
-                <div className="row">
-                  <p>Lender: {this.props.loanRequest.lender}</p>
+                <div className="row left-align">
+                  <b>Lender </b>
+                  <EthAddress address={this.props.loanRequest.lender} />
                 </div>
-                <div className="row">
-                  <p>Borrower: {this.props.loanRequest.borrower}</p>
+                <div className="row left-align">
+                  <b>Borrower </b>
+                  <EthAddress address={this.props.loanRequest.borrower} />
                 </div>
-                <div className="row">
-                  <p>Principal Amount: {this.props.loanRequest.loanAmount / Math.pow(10, 18)}</p>
+                <div className="row left-align">
+                  <p><b>Principal Amount: </b> {this.props.loanRequest.loanAmount / Math.pow(10, 18)}</p>
                 </div>
-                <div className="row">
-                  <p>Interest Amount: {this.props.loanRequest.interestAmount / Math.pow(10, 18)}</p>
+                <div className="row left-align">
+                  <p><b>Interest Amount: </b> {this.props.loanRequest.interestAmount / Math.pow(10, 18)}</p>
                 </div>
-                <div className="row">
-                  <p>Single period (days): {this.props.loanRequest.singlePeriodTime / 86400}</p>
+                <div className="row left-align">
+                  <p><b>Single period (days): </b>{this.props.loanRequest.singlePeriodTime / 86400}</p>
                 </div>
-                <div className="row">
-                  <p>Maximum Interest periods left: {this.props.loanRequest.maximumInterestPeriods}</p>
+                <div className="row left-align">
+                  <p><b>Maximum Interest periods left: </b>{this.props.loanRequest.maximumInterestPeriods}</p>
                 </div>
-                <div className="row">
-                  <p>Loan End Date: {this.getRequestEndingTime(this.props.loanRequest.endLoanTimeStamp)}</p>
+                <div className="row left-align">
+                  <p><b>Loan End Date: </b>{this.getRequestEndingTime(this.props.loanRequest.endLoanTimeStamp)}</p>
                 </div>
-                <div className="row">
-                  <p>Lending Status: {REQUEST_STATUS[this.props.loanRequest.status]}</p>
+                <div className="row left-align">
+                  <p><b>Lending Status: </b>{REQUEST_STATUS[this.props.loanRequest.status]}</p>
                 </div>
                 {actions}
               </div>

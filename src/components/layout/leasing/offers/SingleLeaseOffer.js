@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import M from "materialize-css"
 import { cancelOffer, approveNFT, endLendingOffer, borrowNFT } from '../../../../services/web3/leaseNFTContract'
 import { OFFER_STATUS } from "../../../../assets/consts/offersConsts"
+import { EthAddress } from "rimble-ui";
+
 
 class SingleLeaseOffer extends Component {
 
@@ -105,26 +107,26 @@ class SingleLeaseOffer extends Component {
                   <a className="btn waves-effect waves-light indigo lighten-1 button-offer" href={this.props.nftAsset.permalink}>OpenSea</a>
                 </div>
                 <br/>
-                <div className="row">
-                  <p>Lessor: {this.props.leaseOffer.lender}</p>
+                <div className="row left-align">
+                  <p><b>Lessor </b> <EthAddress address={this.props.leaseOffer.lender} /></p>
                 </div>
-                <div className="row">
-                  <p>Lessee: {this.props.leaseOffer.borrower}</p>
+                <div className="row left-align">
+                  <p><b>Lessee </b> <EthAddress address={this.props.leaseOffer.borrower} /></p>
                 </div>
-                <div className="row">
-                  <p>Collateral Amount: {this.props.leaseOffer.collateralAmount / Math.pow(10, 18)}</p>
+                <div className="row left-align">
+                  <p><b>Collateral Amount: </b>{this.props.leaseOffer.collateralAmount / Math.pow(10, 18)}</p>
                 </div>
-                <div className="row">
-                  <p>Leasing Price: {this.props.leaseOffer.lendingPrice / Math.pow(10, 18)}</p>
+                <div className="row left-align">
+                  <p><b>Leasing Price: </b>{this.props.leaseOffer.lendingPrice / Math.pow(10, 18)}</p>
                 </div>
-                <div className="row">
-                  <p>Leasing Period (days): {this.props.leaseOffer.lendinPeriod / 86400}</p>
+                <div className="row left-align">
+                  <p><b>Leasing Period (days): </b>{this.props.leaseOffer.lendinPeriod / 86400}</p>
                 </div>
-                <div className="row">
-                  <p>End Leasing Time: {this.getOfferEndingTime(this.props.leaseOffer.endLendingTimeStamp)}</p>
+                <div className="row left-align">
+                  <p><b>End Leasing Time: </b>{this.getOfferEndingTime(this.props.leaseOffer.endLendingTimeStamp)}</p>
                 </div>
-                <div className="row">
-                  <p>Leasing Status: {OFFER_STATUS[this.props.leaseOffer.status]}</p>
+                <div className="row left-align">
+                  <p><b>Leasing Status: </b>{OFFER_STATUS[this.props.leaseOffer.status]}</p>
                 </div>
                 {actions}
               </div>

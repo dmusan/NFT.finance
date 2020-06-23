@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Blockie, EthAddress } from "rimble-ui";
+import M from "materialize-css";
 
 import { approveNFT, lendNFT } from '../../../../services/web3/leaseNFTContract'
 
 class NewLeaseOfferCard extends Component {
 
+
   // State will get be filled with changes to input components
   state = {
       collateralAmount: '',
       leasePrice: '',
-      leasePeriod: '',
+      leasePeriod: '31',
   }
 
   handleChange = (evt) => {
@@ -70,18 +72,20 @@ class NewLeaseOfferCard extends Component {
               </div>
             </div>
             <div>
-              <b className="input-margins">Lease Period</b>
-              <div className="input-field">
-                <input id="lease_period" type="text" name="leasePeriod" onChange={this.handleChange} />
-                <label htmlFor="lease_period">Max days for lease</label>
+              <b className="input-margins">Pick Lease Period: </b> {this.state.leasePeriod} days
+              <div id="connect">
+                <p className="range-field">
+                  <input type="range" name="leasePeriod" id="lease_period" min="1" max="31" onChange={this.handleChange} />
+                  <label htmlFor="lease_period">Max days for Leasing</label>
+                </p>
               </div>
             </div>
           </form>
           <div className="row">
-              <button className="btn waves-effect waves-light indigo lighten-1 button-offer right" onClick={ this.approveNFT }>1. Approve Transfer</button>
+              <button className="btn waves-effect waves-light indigo lighten-1 button-offer right" onClick={ this.approveNFT }><i class="material-icons left">looks_one</i> Approve Transfer</button>
           </div>
           <div className="row">
-              <button className="btn waves-effect waves-light indigo lighten-1 button-offer right" onClick={ this.lendNFTButton }>2. Create Offer</button>
+              <button className="btn waves-effect waves-light indigo lighten-1 button-offer right" onClick={ this.lendNFTButton }><i class="material-icons left">looks_two</i> Create Offer</button>
           </div>
         </div>
       </div>

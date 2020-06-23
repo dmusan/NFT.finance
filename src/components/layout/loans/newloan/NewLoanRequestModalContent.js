@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Blockie, EthAddress } from "rimble-ui";
+import M from "materialize-css";
 
 import { approveNFT, createLoanRequest } from '../../../../services/web3/loansNFTContract'
 
 class NewLoanRequestModalContent extends Component {
 
+    componentDidMount() {
+      var elems = document.querySelectorAll('input[type=range]');
+      var instances = M.Modal.init(elems);
+    }
+
+
     state = {
         loanAmount: '',
         interestAmount: '',
-        singlePeriodTime: '',
-        maximumInterestPeriods: ''
+        singlePeriodTime: '31',
+        maximumInterestPeriods: '12'
     }
 
     handleChange = (evt) => {
@@ -71,25 +78,24 @@ class NewLoanRequestModalContent extends Component {
                 </div>
               </div>
               <div>
-                <b className="input-margins">Length of one interest period</b>
-                <div className="input-field">
-                  <input id="lease_period" type="text" name="singlePeriodTime" onChange={this.handleChange} />
-                  <label htmlFor="lease_period">Days for one period</label>
+                <b className="input-margins">Length of one interest period: </b> {this.state.singlePeriodTime} days
+                <div className="range-field">
+                  <input type="range" name="singlePeriodTime" id="single_period" min="1" max="31" onChange={this.handleChange} />
                 </div>
               </div>
+              <br />
               <div>
-                <b className="input-margins">Maximum number of interest periods</b>
-                <div className="input-field">
-                  <input id="interest_periods" type="text" name="maximumInterestPeriods" onChange={this.handleChange} />
-                  <label htmlFor="interest_periods">Max</label>
+                <b className="input-margins">Maximum number of interest periods: </b> {this.state.maximumInterestPeriods}
+                <div className="range-field">
+                  <input type="range" name="maximumInterestPeriods" id="interest_periods" min="1" max="12" onChange={this.handleChange} />
                 </div>
               </div>
             </form>
             <div className="row">
-                <button className="btn indigo lighten-1 button-offer right" onClick={ this.approveNFT }>1. Approve Transfer</button>
+                <button className="btn indigo lighten-1 button-offer right" onClick={ this.approveNFT }><i class="material-icons left">looks_one</i> Approve Transfer</button>
             </div>
             <div className="row">
-                <button className="btn indigo lighten-1 button-offer right" onClick={ this.newLoanRequest }>2. Create Request</button>
+                <button className="btn indigo lighten-1 button-offer right" onClick={ this.newLoanRequest }><i class="material-icons left">looks_two</i> Create Request</button>
             </div>
           </div>
         </div>

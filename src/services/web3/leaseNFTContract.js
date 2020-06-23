@@ -1,13 +1,13 @@
 import Web3 from 'web3'
 import contractInterface from '../../contractsInterfaces/LendNFT.json'
 import erc721ContractInterface from '../../contractsInterfaces/erc721.json'
-import { LEASING_CONTRACT_ADDRESS } from "../../assets/consts/offersConsts"
+import { LEASING_CONTRACT_ADDRESS, RINKEBY_NETWORK_VERSION } from "../../assets/consts/offersConsts"
 import { processingToast, successToast, failedToast } from './toasts.js'
 
 export const getWeb3Account = async () => {
   if (window.ethereum) {
     console.log('version: ' + window.ethereum.networkVersion);
-    if (window.ethereum.networkVersion !== '4') {
+    if (window.ethereum.networkVersion !== RINKEBY_NETWORK_VERSION) {
       alert("Please switch to Rinkeby test network to use this app!");
     }
     return window.ethereum.enable().then( accounts => accounts[0].toLowerCase() );
